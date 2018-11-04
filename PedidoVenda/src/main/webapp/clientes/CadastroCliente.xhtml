@@ -1,0 +1,62 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Novo Cliente</ui:define>
+
+	<ui:define name="corpo">
+		<h1>Novo Cliente</h1>
+
+		<p:toolbar style="margin-top: 20px">
+			<p:toolbarGroup>
+				<p:button value="Novo" outcome="/clientes/CadastroCliente"></p:button>
+				<p:commandButton value="Salvar" id="botaoSalvar"></p:commandButton>
+			</p:toolbarGroup>
+			<p:toolbarGroup align="right">
+				<p:button value="Pesquisa" outcome="/clientes/PesquisaClientes"></p:button>
+			</p:toolbarGroup>
+		</p:toolbar>
+
+		<h:form>
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" size="60" maxlength="80"
+					value="#{clienteBean.cliente.nome}" />
+
+				<p:outputLabel value="Tipo" for="tipoPessoa" />
+
+				<p:selectOneRadio id="tipoPessoa" value="#{clienteBean.cliente.tipoPessoa}"
+					layout="lineDirection">
+					<f:selectItem itemLabel="Física" itemValue="Física" />
+					<f:selectItem itemLabel="Jurídica" itemValue="Jurídica" />
+					<p:ajax event="change" update="@form" />
+				</p:selectOneRadio>
+
+				
+					<p:outputLabel value="CPF" for="cpf"
+						rendered="#{clienteBean.cliente.tipoPessoa eq 'Física'}" />
+					<p:inputMask mask="999.999.999-99" value="CPF" id="cpf"
+						rendered="#{clienteBean.cliente.tipoPessoa eq 'Física'}" />
+					
+					<p:outputLabel value="CNPJ" for="cnpj"
+						rendered="#{clienteBean.cliente.tipoPessoa eq 'Jurídica'}" />
+					<p:inputMask mask="99.999.999/9999-99" value="CNPJ" id="cnpj"
+						rendered="#{clienteBean.cliente.tipoPessoa eq 'Jurídica'}" />
+				
+
+
+				<p:outputLabel value="E-mail" for="email" />
+				<p:inputText id="email" size="60" maxlength="80"
+					value="#{clienteBean.cliente.email}" />
+
+			</p:panelGrid>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
