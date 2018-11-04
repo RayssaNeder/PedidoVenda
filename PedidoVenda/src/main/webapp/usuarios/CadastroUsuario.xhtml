@@ -12,11 +12,11 @@
 
 		<p:toolbar style="margin-top: 20px">
 			<p:toolbarGroup>
-				<p:button value="Novo" outcome="/usuarios/CadastroUsuario"></p:button>
+				<p:button value="Novo" ></p:button>
 				<p:commandButton value="Salvar" id="botaoSalvar"></p:commandButton>
 			</p:toolbarGroup>
 			<p:toolbarGroup align="right">
-				<p:button value="Pesquisa"></p:button>
+				<p:button value="Pesquisa" outcome="/usuarios/PesquisaUsuarios"></p:button>
 			</p:toolbarGroup>
 		</p:toolbar>
 
@@ -27,20 +27,20 @@
 
 				<p:outputLabel value="Nome" for="nome" />
 				<p:inputText id="nome" size="60" maxlength="80"
-					value="#{usuarioBean.nome}" />
+					value="#{usuarioBean.usuario.nome}" />
 
 				<p:outputLabel value="E-mail" for="email" />
 				<p:inputText id="email" size="60" maxlength="80"
-					value="#{usuarioBean.email}" />
+					value="#{usuarioBean.usuario.email}" />
 
 				<p:outputLabel value="Senha" for="senha"/>
-				<p:password id="senha" value="#{usuarioBean.senha}" required="true"
+				<p:password id="senha" value="#{usuarioBean.usuario.senha}" required="true"
 					feedback="true" weakLabel="Fraca" goodLabel="Boa"
 					strongLabel="Forte" promptLabel="Informe uma senha" inline="true"
 					match="confirmacaoSenha" />
 					
 				<p:outputLabel value="Confirme a senha" for="confirmacaoSenha"/>
-				<p:password id="confirmacaoSenha" value="#{usuarioBean.senha}"
+				<p:password id="confirmacaoSenha" value="#{usuarioBean.usuario.senha}"
 					required="true" />
 
 			</p:panelGrid>
