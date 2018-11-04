@@ -54,8 +54,41 @@
 				<p:outputLabel value="E-mail" for="email" />
 				<p:inputText id="email" size="60" maxlength="80"
 					value="#{clienteBean.cliente.email}" />
-
+					
+				<p:button value="Adicionar endereço" ></p:button>
 			</p:panelGrid>
+			
+			<p:dataTable id="enderecosTable" value="#{clienteBean.enderecos}" var="endereco" style="margin-top: 20px" emptyMessage="Nenhum Endereco Encontrado." rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+				
+				<p:column headerText="Logradouro" style="text-align: left">
+					<h:outputText value="#{endereco.logradouro}"/>
+				</p:column>
+				
+				
+				<p:column headerText="Número" style="text-align: left; width: 100px">
+					<h:outputText value="#{endereco.numero}"/>
+				</p:column>
+				
+				<p:column headerText="Complemento" style="text-align: left; width: 100px">
+					<h:outputText value="#{endereco.complemento}"/>
+				</p:column>
+				
+				<p:column headerText="CEP" style="text-align: left; width: 100px">
+					<h:outputText value="#{endereco.cep}"/>
+				</p:column>
+				
+				<p:column headerText="Cidade/UF" style="text-align: left; width: 100px">
+					<h:outputText value="#{endereco.cidadeUF}"/>
+				</p:column>
+				
+				
+				<p:column  style="text-align: center; width: 20px">
+					<p:button icon="ui-icon-pencil" title="Editar"/>
+					<p:commandButton icon="ui-icon-trash" title="Excluir"/>
+				</p:column>
+			</p:dataTable>
+			
+			
 
 		</h:form>
 	</ui:define>
