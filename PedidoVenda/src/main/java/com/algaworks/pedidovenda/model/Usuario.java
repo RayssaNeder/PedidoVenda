@@ -12,6 +12,7 @@ public class Usuario implements Serializable{
 	private String nome;
 	private String email;
 	private String senha;
+	private Grupo grupo; 
 	
 	
 	public String getNome() {
@@ -32,6 +33,15 @@ public class Usuario implements Serializable{
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	public Grupo getGrupo() {
+		return grupo;
+	}
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+
+	
+	
 	
 	
 }

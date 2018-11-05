@@ -12,18 +12,18 @@
 
 		<p:toolbar style="margin-top: 20px">
 			<p:toolbarGroup>
-				<p:button value="Novo" ></p:button>
-				<p:commandButton value="Salvar" id="botaoSalvar"></p:commandButton>
+				<p:button value="Novo"></p:button>
+				<p:commandButton value="Salvar" id="botaoSalvar"/>
 			</p:toolbarGroup>
 			<p:toolbarGroup align="right">
-				<p:button value="Pesquisa" outcome="/usuarios/PesquisaUsuarios"></p:button>
+				<p:button value="Pesquisa" outcome="/usuarios/PesquisaUsuarios"/>
 			</p:toolbarGroup>
 		</p:toolbar>
 
 		<h:form>
 
 			<p:panelGrid columns="2" id="painel"
-				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+				style="width: 100%; margin-top: 20px">
 
 				<p:outputLabel value="Nome" for="nome" />
 				<p:inputText id="nome" size="60" maxlength="80"
@@ -33,17 +33,39 @@
 				<p:inputText id="email" size="60" maxlength="80"
 					value="#{usuarioBean.usuario.email}" />
 
-				<p:outputLabel value="Senha" for="senha"/>
-				<p:password id="senha" value="#{usuarioBean.usuario.senha}" required="true"
-					feedback="true" weakLabel="Fraca" goodLabel="Boa"
+				<p:outputLabel value="Senha" for="senha" />
+				<p:password id="senha" value="#{usuarioBean.usuario.senha}"
+					required="true" feedback="true" weakLabel="Fraca" goodLabel="Boa"
 					strongLabel="Forte" promptLabel="Informe uma senha" inline="true"
 					match="confirmacaoSenha" />
-					
-				<p:outputLabel value="Confirme a senha" for="confirmacaoSenha"/>
-				<p:password id="confirmacaoSenha" value="#{usuarioBean.usuario.senha}"
-					required="true" />
+
+				<p:outputLabel value="Confirme a senha" for="confirmacaoSenha" />
+				<p:password id="confirmacaoSenha"
+					value="#{usuarioBean.usuario.senha}" required="true" />
 
 			</p:panelGrid>
+
+			<h:panelGrid columns="2" style="margin-top: 20px">
+				<p:selectOneMenu id="grupo" value="#{usuarioBean.usuario.grupo}" style="width: 200px"
+					var="grupo" required="true">
+					<f:selectItems value="#{usuarioBean.grupos}" var="grupo"
+						itemLabel="#{grupo.nome}" itemValue="#{grupo}" />
+				</p:selectOneMenu>
+				
+				<p:commandButton value="Adicionar Grupo" id="botaoSalvar"/>
+			</h:panelGrid>
+			
+			<p:dataTable id="grupoTable" value="#{usuarioBean.gruposDoUsuario}" var="grupo" style="margin-top: 20px" emptyMessage="Nenhum grupo Encontrado." rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+				
+				<p:column headerText="Grupo" style="text-align: left">
+					<h:outputText value="#{grupo.nome}"/>
+				</p:column>
+				
+				<p:column  style="text-align: center; width: 20px">
+					<p:commandButton icon="ui-icon-trash" title="Excluir"/>
+				</p:column>
+			</p:dataTable>
+
 
 		</h:form>
 	</ui:define>
