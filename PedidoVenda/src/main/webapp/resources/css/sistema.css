@@ -3,7 +3,7 @@
 body {
 	font-size: 12px;
 	font-family: Arial, Helvetica, sans-serif;
-	margin: 0px;
+	margin: 10px;
 	font-weight: normal;
 }
 
@@ -25,6 +25,13 @@ header > div {
 
 #conteudo{
 	padding: 0px 8px;
+}
+
+#conteudo > h1{
+ font-size: 100px;
+	font-weight: 500;
+	padding: 0px;
+	margin: 0px
 }
 
 footer {
@@ -113,3 +120,20 @@ h1 {
     padding: 0px !important;
 }
 /* Customiza TabView - fim */
+
+
+/* Menu sistema inicio */
+.menu-sistema {
+    border: 0px !important;
+    padding: 0px !important;
+    background: none !important;
+}
+
+.menu-sistema .ui-menu-parent > a .ui-menuitem-text, .menu-sistema > .ui-menu-list > .ui-menuitem > a > .ui-menuitem-text {
+    color: #ffffff !important;
+}
+
+.menu-sistema .ui-icon-triangle-1-s {
+    background: url(#{resource['images:seta-para-baixo.png']}) no-repeat;
+}
+/* Menu sistema fim */
