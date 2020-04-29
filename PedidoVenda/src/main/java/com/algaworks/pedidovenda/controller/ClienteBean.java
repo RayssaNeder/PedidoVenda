@@ -3,8 +3,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import com.algaworks.pedidovenda.model.Cliente;
 import com.algaworks.pedidovenda.model.Endereco;
@@ -52,6 +54,17 @@ public class ClienteBean implements Serializable {
 		cliente.setTipoPessoa(tipoPessoa);
 		cliente.setCpfCnpj(cpf);
 		return cliente;
+	}
+	
+	public void removeCliente() {	
+				
+			// Implementação da funcionalidade de remoção aqui
+		
+			FacesContext context =  FacesContext.getCurrentInstance();
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente removido com sucesso", "Cliente removido com sucesso");
+
+			context.addMessage("exclusaoSucesso", msg);
+		
 	}
 
 	public Cliente getCliente() {

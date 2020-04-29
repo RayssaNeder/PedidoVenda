@@ -11,6 +11,7 @@ public class Cliente implements Serializable {
 	private String tipoPessoa;
 	private String email;
 	private String cpfCnpj;
+	private String telefone;
 	
 	public Cliente() {
 		this.tipoPessoa = "Física";
@@ -41,6 +42,18 @@ public class Cliente implements Serializable {
 	public void setCpfCnpj(String cpfCnpj) {
 		this.cpfCnpj = cpfCnpj;
 	}
+	
+	
+
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 
 
 	public String getTipoPessoa() {
@@ -52,5 +65,7 @@ public class Cliente implements Serializable {
 		System.out.println("SET: " + tipoPessoa);
 		this.tipoPessoa = tipoPessoa;
 	}
+	
+	
 	
 }

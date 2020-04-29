@@ -31,15 +31,15 @@ public class UsuarioBean implements Serializable {
 		usuarios.add(criaUsuario("Maria Abadia das Couves", "mariaabadiadascouves2013@gmail.com"));
 		usuarios.add(criaUsuario("João das Couves Júnior", "junior_couves_joao@yahoo.com.br"));
 		
-		this.grupos = Arrays.asList(Grupo.values());
+	//	this.grupos = Arrays.asList(Grupo.values());
 		this.gruposDoUsuario = setaGruposDoUsuario();
 	
 	}
 	
 	private List<Grupo> setaGruposDoUsuario() {
 		 List<Grupo> gruposDoUsuario = new ArrayList<Grupo>() ;	
-		 gruposDoUsuario.add(Grupo.ADMINISTRADOR);
-		 gruposDoUsuario.add(Grupo.AUXILIAR);
+		// gruposDoUsuario.add(Grupo.ADMINISTRADOR);
+		// gruposDoUsuario.add(Grupo.AUXILIAR);
 		return gruposDoUsuario;
 	}
 
