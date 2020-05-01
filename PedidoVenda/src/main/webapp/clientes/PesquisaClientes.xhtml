@@ -26,16 +26,24 @@
 
 			<p:panelGrid columns="2" id="painel"
 				style="width: 100%; margin-top: 20px" >
-				<p:outputLabel value="CPF/CNPJ" for="cpf" />
-				<p:inputText value="#{clienteBean.cliente.nome}" id="nome" size="40"></p:inputText>
 				
-				<p:outputLabel value="Nome" for="cpf" />
-				<p:inputText value="#{clienteBean.cliente.cpfCnpj}" id="cpf" size="60"></p:inputText>
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText value="#{clienteBean.cliente.cpfCnpj}" id="nome" size="60"></p:inputText>
+				
+				<p:outputLabel value="Tipo" for="" />
+				
+				<p:outputLabel value="CPF/CNPJ" for="cpf" />
+				<p:inputText value="#{clienteBean.cliente.nome}" id="cpf" size="40"></p:inputText>
+				
+				<p:outputLabel value="E-mail" for="email" />
+				<p:inputText value="#{clienteBean.cliente.email}" id="email" size="40"></p:inputText>
+				
+				
 			</p:panelGrid>
 			
 			<p:panel>
-				<p:button value="Adicionar cliente"
-				onclick="PF('inclusaoClienteDialog').show(); return false;" />
+				<p:button value="Adicionar Endereço"
+				onclick="PF('inclusaoEnderecoDialog').show(); return false;" />
 			</p:panel>
 			
 				<p:dataTable id="clientesTable" value="#{clienteBean.clientes}" var="cliente" emptyMessage="Nenhum Cliente Encontrado." rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
@@ -55,14 +63,14 @@
 				
 				<p:column  style="text-align: center; width: 20px">
 					<p:button icon="ui-icon-pencil" title="Editar"/>
-					<p:button title="Editar" icon="ui-icon-trash"
+					<p:button title="Excluir" icon="ui-icon-trash"
 						onclick="PF('excluirCliente').show(); return false;" />
 				</p:column>
 			</p:dataTable>
 			
 			
 			
-			<p:dialog header="Inclusão de Cliente" widgetVar="inclusaoClienteDialog"
+			<p:dialog header="Inclusão de Endereço" widgetVar="inclusaoEnderecoDialog"
 			draggable="false" resizable="false" modal="true" minimizable="true"
 			maximizable="true" showEffect="fade" hideEffect="explode">
 
@@ -70,34 +78,52 @@
 				<p:messages/>
 
 				<h:panelGrid columns="2">
-					<p:outputLabel value="Nome:"></p:outputLabel>
-					<p:inputText id="nomeCliente" size="30" maxlength="80"
-					value="#{clienteBean.cliente.nome}" />
+					<p:outputLabel value="Logradouro"></p:outputLabel>
+					<p:inputText id="logradouro" size="30" maxlength="80"
+					value="#{clienteBean.cliente.endereco.logradouro}" />
 					
-					<p:outputLabel value="Telefone:"></p:outputLabel>
-					<p:inputText id="telefone" size="20" maxlength="10"
-					value="#{clienteBean.cliente.telefone}" />
+					<p:outputLabel value="Número"></p:outputLabel>
+					<p:inputText id="numero" size="20" maxlength="10"
+					value="#{clienteBean.cliente.endereco.numero}" />
 					
-					<p:outputLabel />
-					<p:commandButton value="Incluir" action="#{clienteBean.criaCliente}" update="clientesTable"/>
+					<p:outputLabel value="Complemento"></p:outputLabel>
+					<p:inputText id="complemento" size="30" maxlength="80"
+					value="#{clienteBean.cliente.endereco.complemento}" />
+					
+					<p:outputLabel value="CEP"></p:outputLabel>
+					<p:inputText id="cep" size="30" maxlength="80"
+					value="#{clienteBean.cliente.endereco.cep}" />	
 				</h:panelGrid>
-
 				
+				<div class="ui-g-12">
+					<p:outputLabel value="Cidade"></p:outputLabel>
+					<p:inputText id="cidade" size="15" maxlength="80" 
+					value="#{clienteBean.cliente.endereco.cidade}" />
+					
+					<p:outputLabel value="UF"></p:outputLabel>
+					<p:inputText id="uf" size="15" maxlength="80"
+					value="#{clienteBean.cliente.endereco.uf}" />
+				</div>			
+					
+					<p:commandButton value="Incluir" action="#{clienteBean.criaCliente}" update="clientesTable"/>
+				
+									
 
 				</h:panelGroup>
+				
+				
 		</p:dialog>
 		
 		
-		<p:dialog header="Excluir diálogo" widgetVar="excluirCliente"
+		<p:confirmDialog header="Excluir diálogo" widgetVar="excluirCliente" message="Tem certeza que deseja excluir produto?"
 			draggable="false" resizable="false" modal="false" minimizable="true"
 			maximizable="true" showEffect="fade" hideEffect="explode">
-			Confirma exclusão de Cliente?
 			
 			<h:panelGrid columns="2">
 				<p:commandButton value="Sim" action="#{clienteBean.removeCliente}" oncomplete="PF('excluirCliente').hide(); return false;" update="clientesTable"/>
 				<p:commandButton value="Nao" onclick="PF('excluirCliente').hide(); return false;" />
 			</h:panelGrid>
-		</p:dialog>
+		</p:confirmDialog>
 			
 		</h:form>
 

@@ -12,6 +12,7 @@ public class Cliente implements Serializable {
 	private String email;
 	private String cpfCnpj;
 	private String telefone;
+	private Endereco endereco;
 	
 	public Cliente() {
 		this.tipoPessoa = "Física";
@@ -53,6 +54,18 @@ public class Cliente implements Serializable {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+	
+	
+
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
 

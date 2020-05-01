@@ -55,7 +55,7 @@
 				<p:inputText id="email" size="60" maxlength="80"
 					value="#{clienteBean.cliente.email}" />
 					
-				<p:button value="Adicionar endereço" ></p:button>
+				<p:button value="Adicionar endereço" onclick="PF('inclusaoEnderecoDialog').show(); return false;" ></p:button>
 			</p:panelGrid>
 			
 			<p:dataTable id="enderecosTable" value="#{clienteBean.enderecos}" var="endereco" style="margin-top: 20px" emptyMessage="Nenhum Endereco Encontrado." rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
@@ -78,15 +78,72 @@
 				</p:column>
 				
 				<p:column headerText="Cidade/UF" style="text-align: left; width: 100px">
-					<h:outputText value="#{endereco.cidadeUF}"/>
+					<h:outputText value="#{endereco.cidade}"/>
+				</p:column>
+				
+				<p:column headerText="UF" style="text-align: left; width: 100px">
+					<h:outputText value="#{endereco.uf}"/>
 				</p:column>
 				
 				
 				<p:column  style="text-align: center; width: 20px">
 					<p:button icon="ui-icon-pencil" title="Editar"/>
-					<p:commandButton icon="ui-icon-trash" title="Excluir"/>
+					<p:button title="Excluir" icon="ui-icon-trash"
+						onclick="PF('excluirCliente').show(); return false;" />
 				</p:column>
 			</p:dataTable>
+			
+			<p:dialog header="Inclusão de Endereço" widgetVar="inclusaoEnderecoDialog"
+			draggable="false" resizable="false" modal="true" minimizable="true"
+			maximizable="true" showEffect="fade" hideEffect="explode">
+
+			<h:panelGroup id="inclusaoPanel">
+				<p:messages/>
+
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Logradouro"></p:outputLabel>
+					<p:inputText id="logradouro" size="30" maxlength="80"
+					value="#{clienteBean.cliente.endereco.logradouro}" />
+					
+					<p:outputLabel value="Número"></p:outputLabel>
+					<p:inputText id="numero" size="20" maxlength="10"
+					value="#{clienteBean.cliente.endereco.numero}" />
+					
+					<p:outputLabel value="Complemento"></p:outputLabel>
+					<p:inputText id="complemento" size="30" maxlength="80"
+					value="#{clienteBean.cliente.endereco.complemento}" />
+					
+					<p:outputLabel value="CEP"></p:outputLabel>
+					<p:inputText id="cep" size="30" maxlength="80"
+					value="#{clienteBean.cliente.endereco.cep}" />	
+				</h:panelGrid>
+				
+				<div class="ui-g-12">
+					<p:outputLabel value="Cidade"></p:outputLabel>
+					<p:inputText id="cidade" size="15" maxlength="80" 
+					value="#{clienteBean.cliente.endereco.cidade}" />
+					
+					<p:outputLabel value="UF"></p:outputLabel>
+					<p:inputText id="uf" size="15" maxlength="80"
+					value="#{clienteBean.cliente.endereco.uf}" />
+				</div>			
+					
+					<p:commandButton value="Incluir" action="#{clienteBean.criaCliente}" update="enderecosTable"/>
+				
+				</h:panelGroup>								
+		</p:dialog>
+		
+		
+		<p:confirmDialog header="Excluir diálogo" widgetVar="excluirCliente" message="Tem certeza que deseja excluir produto?"
+			draggable="false" resizable="false" modal="false" minimizable="true"
+			maximizable="true" showEffect="fade" hideEffect="explode">
+			
+			<h:panelGrid columns="2">
+				<p:commandButton value="Sim" action="#{clienteBean.removeCliente}" oncomplete="PF('excluirCliente').hide(); return false;" update="enderecosTable"/>
+				<p:commandButton value="Nao" onclick="PF('excluirCliente').hide(); return false;" />
+			</h:panelGrid>
+		</p:confirmDialog>
+		
 			
 			
 

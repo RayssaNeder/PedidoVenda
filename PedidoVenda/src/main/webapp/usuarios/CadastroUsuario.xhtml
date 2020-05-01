@@ -55,16 +55,29 @@
 				<p:commandButton value="Adicionar Grupo" id="botaoSalvar"/>
 			</h:panelGrid>
 			
-			<p:dataTable id="grupoTable" value="#{usuarioBean.gruposDoUsuario}" var="grupo" style="margin-top: 20px" emptyMessage="Nenhum grupo Encontrado." rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+			<p:dataTable id="grupoTable" value="#{usuarioBean.gruposDoUsuario}"  widgetVar="inclusaoGrupoDialog"
+			var="grupo" style="margin-top: 20px" emptyMessage="Nenhum grupo Encontrado." rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 				
 				<p:column headerText="Grupo" style="text-align: left">
-					<h:outputText value="#{grupo.nome}"/>
+					<h:outputText value="#{grupo.descricao}"/>
 				</p:column>
 				
 				<p:column  style="text-align: center; width: 20px">
-					<p:commandButton icon="ui-icon-trash" title="Excluir"/>
+					<p:button title="Excluir" icon="ui-icon-trash"
+						onclick="PF('excluirGrupo').show(); return false;" />
 				</p:column>
 			</p:dataTable>
+			
+			
+			<p:confirmDialog header="Excluir Grupo" message="Tem certeza que deseja excluir grupo"
+			draggable="false" resizable="false" modal="false" minimizable="true" widgetVar="excluirGrupo"
+			maximizable="true" showEffect="fade" hideEffect="explode">
+			
+			<h:panelGrid columns="2">
+				<p:commandButton value="Sim" action="#{clienteBean.removeCliente}" oncomplete="PF('excluirGrupo').hide(); return false;" update="grupoTable"/>
+				<p:commandButton value="Nao" onclick="PF('excluirGrupo').hide(); return false;" />
+			</h:panelGrid>
+		</p:confirmDialog>
 
 
 		</h:form>

@@ -33,18 +33,19 @@ public class ClienteBean implements Serializable {
 			clientes.add(criaCliente("Supermercado Preço Bom Ltda", "Jurídica", "02.493.738/0001-83"));
 			
 			enderecos = new ArrayList<Endereco>();
-			enderecos.add(criaEndereco("Rua das Pedras Grandes Azuis", "1234", "Ap. 1022", "38499-533", "Uberlandia/MG"));
-			enderecos.add(criaEndereco("Av. Randon Pacheco", "455", "Sala 923", "38408-111", "Uberlandia/MG"));
+			enderecos.add(criaEndereco("Rua das Pedras Grandes Azuis", "1234", "Ap. 1022", "38499-533", "Uberlandia", "MG"));
+			enderecos.add(criaEndereco("Av. Randon Pacheco", "455", "Sala 923", "38408-111", "Uberlandia", "MG"));
 	
 	}
 	
-	private Endereco criaEndereco(String logradouro, String numero, String complemento, String cep, String cidadeUF) {
+	private Endereco criaEndereco(String logradouro, String numero, String complemento, String cep, String cidade, String uf) {
 		Endereco endereco = new Endereco();
 		endereco.setLogradouro(logradouro);
 		endereco.setNumero(numero);
 		endereco.setComplemento(complemento);
 		endereco.setCep(cep);
-		endereco.setCidadeUF(cidadeUF);
+		endereco.setCidade(cidade);
+		endereco.setUf(uf);
 		return endereco;
 	}
 
