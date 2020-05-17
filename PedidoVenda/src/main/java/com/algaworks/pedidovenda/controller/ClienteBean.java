@@ -5,13 +5,15 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped; //View do CDI
+//import javax.faces.bean.ViewScoped; //View do JFF
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 
 import com.algaworks.pedidovenda.model.Cliente;
 import com.algaworks.pedidovenda.model.Endereco;
 
-@ManagedBean
+@Named
 @ViewScoped
 public class ClienteBean implements Serializable {
 	

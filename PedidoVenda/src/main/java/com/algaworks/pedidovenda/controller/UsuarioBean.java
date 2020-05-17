@@ -1,24 +1,27 @@
 package com.algaworks.pedidovenda.controller;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
+//import javax.faces.bean.ManagedBean;
+//import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
 
-import com.algaworks.pedidovenda.model.Cliente;
+//import com.algaworks.pedidovenda.model.Cliente;
 import com.algaworks.pedidovenda.model.Grupo;
 import com.algaworks.pedidovenda.model.Usuario;
 
-@ManagedBean
+@Named
 @ViewScoped
 public class UsuarioBean implements Serializable {
+	
+	
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -594794188067693016L;
+	private static final long serialVersionUID = 1L;
 	private Usuario usuario = new Usuario();
 	private List<Usuario> usuarios = new ArrayList<Usuario>();
 	private List<Grupo> grupos;
