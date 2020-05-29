@@ -13,9 +13,14 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ExceptionQueuedEvent;
 import javax.faces.event.ExceptionQueuedEventContext;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.algaworks.pedidovenda.service.NegocioException;
 
 public class JsfEceptionHandler extends ExceptionHandlerWrapper {
+	
+	private static Log log = LogFactory.getLog(JsfEceptionHandler.class);
 
 	private ExceptionHandler wrapped;
 
@@ -51,6 +56,7 @@ public class JsfEceptionHandler extends ExceptionHandlerWrapper {
 				else {
 					redirect("/Erro.xhtml");
 					handled = true;
+					log.error("Erro de sistema: " + exception.getMessage(), exception);
 				}
 			} finally {
 				if (handled) {
