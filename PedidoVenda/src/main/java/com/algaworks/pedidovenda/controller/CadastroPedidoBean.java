@@ -9,6 +9,8 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import com.algaworks.pedidovenda.service.NegocioException;
+
 
 @Named
 @ViewScoped
@@ -30,6 +32,8 @@ public class CadastroPedidoBean implements Serializable {
 		return itens;
 	}
 	
-	
+	public void salvar(){
+		throw new NegocioException("Pedido não salvo.Implementação em andamento");
+	}
 
 }
