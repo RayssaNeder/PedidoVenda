@@ -12,6 +12,7 @@ import javax.inject.Named;
 
 import com.algaworks.pedidovenda.model.Cliente;
 import com.algaworks.pedidovenda.model.Endereco;
+import com.algaworks.pedidovenda.model.TipoPessoa;
 
 @Named
 @ViewScoped
@@ -30,9 +31,9 @@ public class ClienteBean implements Serializable {
 	public ClienteBean() {
 		cliente = new Cliente();
 		clientes = new ArrayList<Cliente>();
-			clientes.add(criaCliente("Supermercado João das Couves Ltda", "Jurídica", "02.493.738/0001-83"));
-			clientes.add(criaCliente("Maria Conceição da Abadia", "Física", "02.493.738/0001-83"));
-			clientes.add(criaCliente("Supermercado Preço Bom Ltda", "Jurídica", "02.493.738/0001-83"));
+			clientes.add(criaCliente("Supermercado João das Couves Ltda", TipoPessoa.FISICA, "02.493.738/0001-83"));
+			clientes.add(criaCliente("Maria Conceição da Abadia", TipoPessoa.FISICA, "02.493.738/0001-83"));
+			clientes.add(criaCliente("Supermercado Preço Bom Ltda", TipoPessoa.FISICA, "02.493.738/0001-83"));
 			
 			enderecos = new ArrayList<Endereco>();
 			enderecos.add(criaEndereco("Rua das Pedras Grandes Azuis", "1234", "Ap. 1022", "38499-533", "Uberlandia", "MG"));
@@ -51,7 +52,7 @@ public class ClienteBean implements Serializable {
 		return endereco;
 	}
 
-	private Cliente criaCliente(String nome, String tipoPessoa, String cpf) {
+	private Cliente criaCliente(String nome, TipoPessoa tipoPessoa, String cpf) {
 		Cliente cliente = new Cliente();
 		cliente.setNome(nome);
 		cliente.setTipoPessoa(tipoPessoa);
