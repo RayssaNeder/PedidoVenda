@@ -41,8 +41,10 @@ public class UsuarioBean implements Serializable {
 	
 	private List<Grupo> setaGruposDoUsuario() {
 		 List<Grupo> gruposDoUsuario = new ArrayList<Grupo>() ;	
-		gruposDoUsuario.add(Grupo.ADMINISTRADOR);
-		gruposDoUsuario.add(Grupo.AUXILIAR);
+			/*
+			 * gruposDoUsuario.add(Grupo.ADMINISTRADOR);
+			 * gruposDoUsuario.add(Grupo.AUXILIAR);
+			 */
 		return gruposDoUsuario;
 	}
 

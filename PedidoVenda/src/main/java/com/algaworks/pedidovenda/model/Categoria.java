@@ -1,19 +1,23 @@
 package com.algaworks.pedidovenda.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
-public class Categoria {
+public class Categoria implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	private Long id;
 	private String descricao;
-	@OneToMany
+	private Categoria categoriaPai;
 	private List<Categoria> subCategorias = new ArrayList<>();
 	
 	public Long getId() {
@@ -28,7 +32,15 @@ public class Categoria {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+	
 
+	public Categoria getCategoriaPai() {
+		return categoriaPai;
+	}
+	public void setCategoriaPai(Categoria categoriaPai) {
+		this.categoriaPai = categoriaPai;
+	}
 	public List<Categoria> getSubCategorias() {
 		return subCategorias;
 	}
