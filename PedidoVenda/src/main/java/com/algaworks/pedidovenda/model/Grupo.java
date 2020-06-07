@@ -1,14 +1,29 @@
 package com.algaworks.pedidovenda.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+@Entity
 public class Grupo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue
 	private Long id;
+	@Column(nullable = false, length =  100)
 	private String nome;
+	@Column(nullable = false)
 	private String descricao;
+	@ManyToMany
+	private List<Usuario> usuarios = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -32,6 +47,15 @@ public class Grupo implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 
 	@Override

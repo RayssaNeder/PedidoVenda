@@ -5,7 +5,9 @@ import javax.persistence.Persistence;
 
 import com.algaworks.pedidovenda.model.Cliente;
 import com.algaworks.pedidovenda.model.Endereco;
+import com.algaworks.pedidovenda.model.Grupo;
 import com.algaworks.pedidovenda.model.TipoPessoa;
+import com.algaworks.pedidovenda.model.Usuario;
 
 public class Teste {
 	
@@ -16,24 +18,18 @@ public class Teste {
 		EntityTransaction trx = manager.getTransaction();
 		trx.begin();
 		
-		Cliente cliente = new  Cliente();
-		cliente.setNome("Joao das couves");
-		cliente.setEmail("joaodascouves@gmail.com");
-		cliente.setDocumentoReceitaFederal("08033291299");
-		cliente.setTipoPessoa(TipoPessoa.FISICA);
-		
-		Endereco endereco = new Endereco();
-		endereco.setLogradouro("Rua das Pedras Grandes Azuis");
-		endereco.setCidade("Uberlandia");
-		endereco.setNumero("1234");
-		endereco.setCep("38499-533");
-		endereco.setUf("MG");
-		endereco.setCliente(cliente);
-		
-		cliente.getEnderecos().add(endereco);
-		
-		
-		manager.persist(cliente);
+		Usuario usuario = new Usuario();
+		usuario.setNome("Maria");
+		usuario.setEmail("maria@abadia.com");
+		usuario.setSenha("123");
+				
+		Grupo grupo = new Grupo();
+		grupo.setNome("Vendedores");
+		grupo.setDescricao("Vendedores da empresa");
+				
+		usuario.getGrupos().add(grupo);
+				
+		manager.persist(usuario);
 		
 		trx.commit();
 	}
