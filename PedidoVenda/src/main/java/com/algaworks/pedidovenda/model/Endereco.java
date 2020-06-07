@@ -2,9 +2,11 @@ package com.algaworks.pedidovenda.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -17,13 +19,20 @@ public class Endereco implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@Column(nullable = false, length = 150)
 	private String logradouro;
+	@Column(nullable = false, length = 20)
 	private String numero;
+	@Column(length = 150)
 	private String complemento;
+	@Column(nullable = false, length = 9)
 	private String cep;
+	@Column(nullable = false, length = 60)
 	private String cidade;
+	@Column(nullable = false, length = 60)
 	private String uf;
 	@ManyToOne
+	@JoinColumn(name = "cliente_id", nullable = false)
 	private Cliente cliente;
 
 	public Long getId() {

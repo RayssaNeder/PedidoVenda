@@ -6,7 +6,10 @@ import java.util.List;
 
 import javax.annotation.Generated;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -22,9 +25,14 @@ public class Cliente implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@Column(nullable = false, length = 100)
 	private String nome;
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, length = 10)
 	private TipoPessoa tipoPessoa;
+	@Column(nullable = false, length = 255)
 	private String email;
+	@Column(name = "doc_receita_federal", nullable = false, length = 14)
 	private String documentoReceitaFederal;
 	private String telefone;
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
