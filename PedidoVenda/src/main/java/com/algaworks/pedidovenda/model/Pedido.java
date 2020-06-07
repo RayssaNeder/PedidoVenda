@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 
 @Entity
@@ -29,6 +30,7 @@ public class Pedido implements Serializable {
 	private Cliente cliente;
 	private EnderecoEntrega enderecoEntrega;
 	private StatusPedido statusPedido;
+	@Transient
 	private List<ItemPedido> itensPedido;
 	private FormaPagamento formaPagamento;
 	

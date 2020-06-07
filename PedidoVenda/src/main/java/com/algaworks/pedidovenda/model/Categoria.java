@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Categoria implements Serializable {
@@ -18,6 +19,7 @@ public class Categoria implements Serializable {
 	private Long id;
 	private String descricao;
 	private Categoria categoriaPai;
+	@Transient
 	private List<Categoria> subCategorias = new ArrayList<>();
 	
 	public Long getId() {

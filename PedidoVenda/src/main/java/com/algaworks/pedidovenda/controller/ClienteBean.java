@@ -56,7 +56,7 @@ public class ClienteBean implements Serializable {
 		Cliente cliente = new Cliente();
 		cliente.setNome(nome);
 		cliente.setTipoPessoa(tipoPessoa);
-		cliente.setCpfCnpj(cpf);
+		cliente.setDocumentoReceitaFederal(cpf);
 		return cliente;
 	}
 	

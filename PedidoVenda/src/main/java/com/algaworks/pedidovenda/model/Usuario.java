@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Usuario implements Serializable{
@@ -17,6 +18,7 @@ public class Usuario implements Serializable{
 	private String nome;
 	private String email;
 	private String senha;
+	@Transient
 	private List<Grupo> grupo = new ArrayList<>(); 
 	
 	

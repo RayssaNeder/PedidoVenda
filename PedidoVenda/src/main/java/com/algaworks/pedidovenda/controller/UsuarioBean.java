@@ -7,6 +7,7 @@ import javax.faces.view.ViewScoped;
 //import javax.faces.bean.ManagedBean;
 //import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
+import javax.persistence.Transient;
 
 //import com.algaworks.pedidovenda.model.Cliente;
 import com.algaworks.pedidovenda.model.Grupo;

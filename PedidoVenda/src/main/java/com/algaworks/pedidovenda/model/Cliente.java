@@ -4,9 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Generated;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity
 public class Cliente implements Serializable {
@@ -14,14 +18,16 @@ public class Cliente implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@Id
+	@GeneratedValue
 	private Long id;
 	private String nome;
 	private TipoPessoa tipoPessoa;
 	private String email;
-	private String cpfCnpj;
+	private String documentoReceitaFederal;
 	private String telefone;
-	@OneToMany
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	public Cliente() {
@@ -51,12 +57,22 @@ public class Cliente implements Serializable {
 		this.email = email;
 	}
 
-	public String getCpfCnpj() {
-		return cpfCnpj;
+	
+
+	public String getDocumentoReceitaFederal() {
+		return documentoReceitaFederal;
 	}
 
-	public void setCpfCnpj(String cpfCnpj) {
-		this.cpfCnpj = cpfCnpj;
+	public void setDocumentoReceitaFederal(String documentoReceitaFederal) {
+		this.documentoReceitaFederal = documentoReceitaFederal;
+	}
+
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 
 	public String getTelefone() {
@@ -67,13 +83,6 @@ public class Cliente implements Serializable {
 		this.telefone = telefone;
 	}
 
-	public List<Endereco> getEndereco() {
-		return enderecos;
-	}
-
-	public void setEndereco(List<Endereco> endereco) {
-		this.enderecos = endereco;
-	}
 
 	public TipoPessoa getTipoPessoa() {
 		return tipoPessoa;
