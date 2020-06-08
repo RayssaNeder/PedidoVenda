@@ -13,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -32,6 +35,7 @@ public class Produto implements Serializable{
 	private String sku;
 	@Column(name = "valor_unitario",precision = 10, scale = 2)
 	private BigDecimal valorUnitario;
+	@NotNull @Min(0) @Max(9999)
 	@Column(name = "qtde_estoque")
 	private Integer qtdeEstoque;
 	@ManyToOne
