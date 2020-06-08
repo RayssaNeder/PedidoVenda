@@ -1,11 +1,15 @@
+import java.math.BigDecimal;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import com.algaworks.pedidovenda.model.Categoria;
 import com.algaworks.pedidovenda.model.Cliente;
 import com.algaworks.pedidovenda.model.Endereco;
 import com.algaworks.pedidovenda.model.Grupo;
+import com.algaworks.pedidovenda.model.Produto;
 import com.algaworks.pedidovenda.model.TipoPessoa;
 import com.algaworks.pedidovenda.model.Usuario;
 
@@ -18,18 +22,30 @@ public class Teste {
 		EntityTransaction trx = manager.getTransaction();
 		trx.begin();
 		
-		Usuario usuario = new Usuario();
-		usuario.setNome("Maria");
-		usuario.setEmail("maria@abadia.com");
-		usuario.setSenha("123");
+		Categoria categoriaPai = new Categoria();
+		categoriaPai.setDescricao("Bebidas");
 				
-		Grupo grupo = new Grupo();
-		grupo.setNome("Vendedores");
-		grupo.setDescricao("Vendedores da empresa");
+		// instanciamos a categoria filha (Refrigerantes)
+		Categoria categoriaFilha = new Categoria();
+		categoriaFilha.setDescricao("Refrigerantes");
+		categoriaFilha.setCategoriaPai(categoriaPai);
 				
-		usuario.getGrupos().add(grupo);
+		// adicionamos a categoria Refrigerantes como filha de Bebidas
+		categoriaPai.getSubcategorias().add(categoriaFilha);
 				
-		manager.persist(usuario);
+		// ao persistir a categoria pai (Refrigerantes), a filha (Bebidas) 
+		// deve ser persistida também
+		manager.persist(categoriaPai);
+				
+		// instanciamos e persistimos um produto
+		Produto produto = new Produto();
+		produto.setCategoria(categoriaFilha);
+		produto.setNome("Guaraná 2L");
+		produto.setQtdeEstoque(10);
+		produto.setSku("GUA00123");
+		produto.setValorUnitario(new BigDecimal(2.21));
+				
+		manager.persist(produto);
 		
 		trx.commit();
 	}
