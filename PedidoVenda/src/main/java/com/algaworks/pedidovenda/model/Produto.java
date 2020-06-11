@@ -16,6 +16,9 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 
 @Entity
@@ -30,10 +33,13 @@ public class Produto implements Serializable{
 	@GeneratedValue
 	private Long id;
 	@Column(nullable = false, length = 100)
+	@NotBlank
+	@Size(max = 10)
 	private String nome;
 	@Column(nullable = false, unique = true)
 	private String sku;
 	@Column(name = "valor_unitario",precision = 10, scale = 2)
+	@NotNull
 	private BigDecimal valorUnitario;
 	@NotNull @Min(0) @Max(9999)
 	@Column(name = "qtde_estoque")
