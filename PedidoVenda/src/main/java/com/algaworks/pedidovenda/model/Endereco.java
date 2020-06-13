@@ -8,6 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Endereco implements Serializable {
@@ -20,17 +25,24 @@ public class Endereco implements Serializable {
 	@GeneratedValue
 	private Long id;
 	@Column(nullable = false, length = 150)
+	@NotBlank @Size(max = 150)
 	private String logradouro;
 	@Column(nullable = false, length = 20)
+	@NotBlank @Size(max = 20)
 	private String numero;
 	@Column(length = 150)
+	@NotBlank @Size(max = 150)
 	private String complemento;
 	@Column(nullable = false, length = 9)
+	@NotBlank @Size(max = 9)
 	private String cep;
+	@NotBlank @Size(max = 60)
 	@Column(nullable = false, length = 60)
 	private String cidade;
+	@NotBlank @Size(max = 60)
 	@Column(nullable = false, length = 60)
 	private String uf;
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "cliente_id", nullable = false)
 	private Cliente cliente;

@@ -23,21 +23,21 @@ public class ClienteBean implements Serializable {
 	 */
 	
 	private static final long serialVersionUID = 1L;
-	private Cliente cliente;
-	private List<Cliente> clientes;
-	private List<Endereco> enderecos;
+	private Cliente cliente = new Cliente();
+	private Endereco endereco = new Endereco();
+	private List<Cliente> clientes = new ArrayList<Cliente>();
+	private List<Endereco> enderecos = new ArrayList<Endereco>();
 	
 	
 	public ClienteBean() {
-		cliente = new Cliente();
-		clientes = new ArrayList<Cliente>();
-			clientes.add(criaCliente("Supermercado João das Couves Ltda", TipoPessoa.FISICA, "02.493.738/0001-83"));
-			clientes.add(criaCliente("Maria Conceição da Abadia", TipoPessoa.FISICA, "02.493.738/0001-83"));
-			clientes.add(criaCliente("Supermercado Preço Bom Ltda", TipoPessoa.FISICA, "02.493.738/0001-83"));
-			
-			enderecos = new ArrayList<Endereco>();
-			enderecos.add(criaEndereco("Rua das Pedras Grandes Azuis", "1234", "Ap. 1022", "38499-533", "Uberlandia", "MG"));
-			enderecos.add(criaEndereco("Av. Randon Pacheco", "455", "Sala 923", "38408-111", "Uberlandia", "MG"));
+		
+		this.cliente = criaCliente("Rayssa", TipoPessoa.FISICA, "08044101423");
+		this.endereco = criaEndereco("Rua itarema", "12", "casaA", "58059122", "joão Pessoa", "PE");
+		
+		this.enderecos.add(endereco);
+		this.cliente.setEnderecos(enderecos);
+		this.clientes.add(cliente);
+		
 	
 	}
 	
@@ -91,6 +91,18 @@ public class ClienteBean implements Serializable {
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	
+	
+	
+	
 	
 	
 	

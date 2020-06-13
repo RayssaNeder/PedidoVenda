@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -34,34 +35,51 @@ public class Pedido implements Serializable {
 	private Long id;
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_criacao", nullable = false)
+	@NotNull
 	private Date dataCriacao;
 	@Column(columnDefinition = "text")
 	private String observacao;
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_entrega", nullable = false)
+	@NotNull
 	private Date dataEntrega;
 	@Column(name = "valor_frete", nullable = false, precision = 10, scale = 2)
+	@NotNull
 	private BigDecimal valorFrete;
 	@Column(name = "valor_desconto", nullable = false, precision = 10, scale = 2)
+	@NotNull
 	private BigDecimal valorDesconto;
 	@Column(name = "valor_total", nullable = false, precision = 10, scale = 2)
+	@NotNull
 	private BigDecimal valorTotal;
 	@ManyToOne
 	@JoinColumn(name = "vendedor_id", nullable = false)
+	@NotNull
 	private Usuario vendedor;
 	@ManyToOne
 	@JoinColumn(name = "cliente_id", nullable = false)
+	@NotNull
 	private Cliente cliente;
 	@Embedded
 	private EnderecoEntrega enderecoEntrega;
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 20)
+	@NotNull
 	private StatusPedido statusPedido;
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ItemPedido> itensPedido;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "forma_pagamento",nullable = false, length = 20)
+	@NotNull
 	private FormaPagamento formaPagamento;
+	
+	private List<FormaPagamento> formasDePagamento;
+	
+
+	
+	
+	
+	
 	
 	
 	public Long getId() {
@@ -131,6 +149,8 @@ public class Pedido implements Serializable {
 	public void setEnderecoEntrega(EnderecoEntrega enderecoEntrega) {
 		this.enderecoEntrega = enderecoEntrega;
 	}
+	
+	
 	public StatusPedido getStatusPedido() {
 		return statusPedido;
 	}
@@ -143,6 +163,19 @@ public class Pedido implements Serializable {
 	public void setFormaPagamento(FormaPagamento formaPagamento) {
 		this.formaPagamento = formaPagamento;
 	}
+
+
+
+	public List<FormaPagamento> getFormasDePagamento() {
+		return formasDePagamento;
+	}
+
+
+
+	public void setFormasDePagamento(List<FormaPagamento> formasDePagamento) {
+		this.formasDePagamento = formasDePagamento;
+	}
+	
 	
 	
 	

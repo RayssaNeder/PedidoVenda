@@ -24,8 +24,8 @@ public class UsuarioBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Usuario usuario = new Usuario();
+	private Grupo grupo = new Grupo();
 	private List<Usuario> usuarios = new ArrayList<Usuario>();
-	private List<Grupo> grupos;
 	private List<Grupo> gruposDoUsuario;
 	
 	public UsuarioBean() {
@@ -37,6 +37,7 @@ public class UsuarioBean implements Serializable {
 		
 	//	this.grupos = Arrays.asList(Grupo.values());
 		this.gruposDoUsuario = setaGruposDoUsuario();
+		this.usuario.setGrupos(gruposDoUsuario);
 	
 	}
 	
@@ -55,6 +56,7 @@ public class UsuarioBean implements Serializable {
 		usuario.setEmail(email);
 		return usuario;
 	}
+	
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -71,13 +73,6 @@ public class UsuarioBean implements Serializable {
 		this.usuarios = usuarios;
 	}
 
-	public List<Grupo> getGrupos() {
-		return grupos;
-	}
-
-	public void setGrupos(List<Grupo> grupos) {
-		this.grupos = grupos;
-	}
 
 	public void setGruposDoUsuario(List<Grupo> gruposDoUsuario) {
 		this.gruposDoUsuario = gruposDoUsuario;
@@ -86,6 +81,16 @@ public class UsuarioBean implements Serializable {
 	public List<Grupo> getGruposDoUsuario() {
 		return gruposDoUsuario;
 	}
+
+	public Grupo getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+	
+	
 	
 	
 	

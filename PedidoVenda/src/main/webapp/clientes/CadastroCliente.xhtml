@@ -40,14 +40,14 @@
 
 				
 					<p:outputLabel value="CPF" for="cpf"
-						rendered="#{clienteBean.cliente.tipoPessoa eq 'Física'}" />
+						rendered="#{clienteBean.cliente.tipoPessoa eq 'FISICA'}" />
 					<p:inputMask mask="999.999.999-99" value="CPF" id="cpf"
-						rendered="#{clienteBean.cliente.tipoPessoa eq 'Física'}" />
+						rendered="#{clienteBean.cliente.tipoPessoa eq 'FISICA'}" />
 					
 					<p:outputLabel value="CNPJ" for="cnpj"
-						rendered="#{clienteBean.cliente.tipoPessoa eq 'Jurídica'}" />
+						rendered="#{clienteBean.cliente.tipoPessoa eq 'JURIDICA'}" />
 					<p:inputMask mask="99.999.999/9999-99" value="CNPJ" id="cnpj"
-						rendered="#{clienteBean.cliente.tipoPessoa eq 'Jurídica'}" />
+						rendered="#{clienteBean.cliente.tipoPessoa eq 'JURIDICA'}" />
 				
 
 
@@ -58,7 +58,7 @@
 				<p:button value="Adicionar endereço" onclick="PF('inclusaoEnderecoDialog').show(); return false;" ></p:button>
 			</p:panelGrid>
 			
-			<p:dataTable id="enderecosTable" value="#{clienteBean.enderecos}" var="endereco" style="margin-top: 20px" emptyMessage="Nenhum Endereco Encontrado." rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+			<p:dataTable id="enderecosTable" value="#{clienteBean.cliente.enderecos}" var="endereco" style="margin-top: 20px" emptyMessage="Nenhum Endereco Encontrado." rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 				
 				<p:column headerText="Logradouro" style="text-align: left">
 					<h:outputText value="#{endereco.logradouro}"/>
@@ -103,29 +103,29 @@
 				<h:panelGrid columns="2">
 					<p:outputLabel value="Logradouro"></p:outputLabel>
 					<p:inputText id="logradouro" size="30" maxlength="80"
-					value="#{clienteBean.cliente.endereco.logradouro}" />
+					value="#{clienteBean.endereco.logradouro}" />
 					
 					<p:outputLabel value="Número"></p:outputLabel>
 					<p:inputText id="numero" size="20" maxlength="10"
-					value="#{clienteBean.cliente.endereco.numero}" />
+					value="#{clienteBean.endereco.numero}" />
 					
 					<p:outputLabel value="Complemento"></p:outputLabel>
 					<p:inputText id="complemento" size="30" maxlength="80"
-					value="#{clienteBean.cliente.endereco.complemento}" />
+					value="#{clienteBean.endereco.complemento}" />
 					
 					<p:outputLabel value="CEP"></p:outputLabel>
 					<p:inputText id="cep" size="30" maxlength="80"
-					value="#{clienteBean.cliente.endereco.cep}" />	
+					value="#{clienteBean.endereco.cep}" />	
 				</h:panelGrid>
 				
 				<div class="ui-g-12">
 					<p:outputLabel value="Cidade"></p:outputLabel>
 					<p:inputText id="cidade" size="15" maxlength="80" 
-					value="#{clienteBean.cliente.endereco.cidade}" />
+					value="#{clienteBean.endereco.cidade}" />
 					
 					<p:outputLabel value="UF"></p:outputLabel>
 					<p:inputText id="uf" size="15" maxlength="80"
-					value="#{clienteBean.cliente.endereco.uf}" />
+					value="#{clienteBean.endereco.uf}" />
 				</div>			
 					
 					<p:commandButton value="Incluir" action="#{clienteBean.criaCliente}" update="enderecosTable"/>

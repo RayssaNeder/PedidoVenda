@@ -14,6 +14,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Cliente implements Serializable {
@@ -26,16 +30,21 @@ public class Cliente implements Serializable {
 	@GeneratedValue
 	private Long id;
 	@Column(nullable = false, length = 100)
+	@NotBlank @Size(max = 100)
 	private String nome;
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 10)
+	@NotNull @Size(max = 10)
 	private TipoPessoa tipoPessoa;
 	@Column(nullable = false, length = 255)
+	@NotBlank @Size(max = 255)
 	private String email;
 	@Column(name = "doc_receita_federal", nullable = false, length = 14)
+	@NotBlank @Size(max = 14)
 	private String documentoReceitaFederal;
 	private String telefone;
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	@NotNull
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	public Cliente() {

@@ -46,9 +46,9 @@
 			</p:panelGrid>
 
 			<h:panelGrid columns="2" style="margin-top: 20px">
-				<p:selectOneMenu id="grupo" value="#{usuarioBean.usuario.grupo}" style="width: 200px"
+				<p:selectOneMenu id="grupo" value="#{usuarioBean.grupo}" style="width: 200px"
 					var="grupo" required="true">
-					<f:selectItems value="#{usuarioBean.grupos}" var="grupo"
+					<f:selectItems value="#{usuarioBean.gruposDoUsuario}" var="grupo"
 						itemLabel="#{grupo.nome}" itemValue="#{grupo}" />
 				</p:selectOneMenu>
 				
