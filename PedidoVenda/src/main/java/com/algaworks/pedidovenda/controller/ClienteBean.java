@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped; //View do CDI
 //import javax.faces.bean.ViewScoped; //View do JFF
 import javax.faces.context.FacesContext;
@@ -12,7 +11,9 @@ import javax.inject.Named;
 
 import com.algaworks.pedidovenda.model.Cliente;
 import com.algaworks.pedidovenda.model.Endereco;
+import com.algaworks.pedidovenda.model.EnderecoEntrega;
 import com.algaworks.pedidovenda.model.TipoPessoa;
+import com.algaworks.pedidovenda.service.NegocioException;
 
 @Named
 @ViewScoped
@@ -23,22 +24,30 @@ public class ClienteBean implements Serializable {
 	 */
 	
 	private static final long serialVersionUID = 1L;
-	private Cliente cliente = new Cliente();
+	private Cliente cliente;
+	private List<Integer> clientes;
+	private List<Endereco> enderecos = new ArrayList<>();
 	private Endereco endereco = new Endereco();
-	private List<Cliente> clientes = new ArrayList<Cliente>();
-	private List<Endereco> enderecos = new ArrayList<Endereco>();
 	
 	
 	public ClienteBean() {
 		
-		this.cliente = criaCliente("Rayssa", TipoPessoa.FISICA, "08044101423");
-		this.endereco = criaEndereco("Rua itarema", "12", "casaA", "58059122", "joão Pessoa", "PE");
+		//this.cliente = criaCliente("Rayssa", TipoPessoa.FISICA, "08044101423");
+		//this.endereco = criaEndereco("Rua itarema", "12", "casaA", "58059122", "joão Pessoa", "PE");
 		
-		this.enderecos.add(endereco);
-		this.cliente.setEnderecos(enderecos);
-		this.clientes.add(cliente);
+		
+		enderecos.add(endereco);
+		
+		cliente = new Cliente();
+		clientes = new ArrayList<>();
+		cliente.setEnderecos(enderecos);
+		this.clientes.add(1);
 		
 	
+	}
+	
+	public void salvar(){
+		throw new NegocioException("Cliente não salvo.Implementação em andamento");
 	}
 	
 	private Endereco criaEndereco(String logradouro, String numero, String complemento, String cep, String cidade, String uf) {
@@ -77,10 +86,14 @@ public class ClienteBean implements Serializable {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	public List<Cliente> getClientes() {
+	
+	
+
+	public List<Integer> getClientes() {
 		return clientes;
 	}
-	public void setClientes(List<Cliente> clientes) {
+
+	public void setClientes(List<Integer> clientes) {
 		this.clientes = clientes;
 	}
 

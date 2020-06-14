@@ -42,7 +42,6 @@ public class Endereco implements Serializable {
 	@NotBlank @Size(max = 60)
 	@Column(nullable = false, length = 60)
 	private String uf;
-	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "cliente_id", nullable = false)
 	private Cliente cliente;

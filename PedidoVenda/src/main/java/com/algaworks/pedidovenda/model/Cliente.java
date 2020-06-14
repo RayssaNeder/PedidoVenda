@@ -34,7 +34,6 @@ public class Cliente implements Serializable {
 	private String nome;
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 10)
-	@NotNull @Size(max = 10)
 	private TipoPessoa tipoPessoa;
 	@Column(nullable = false, length = 255)
 	@NotBlank @Size(max = 255)
@@ -44,7 +43,6 @@ public class Cliente implements Serializable {
 	private String documentoReceitaFederal;
 	private String telefone;
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-	@NotNull
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	public Cliente() {

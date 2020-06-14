@@ -8,19 +8,22 @@
 	<ui:define name="titulo">Novo Cliente</ui:define>
 
 	<ui:define name="corpo">
+	<h:form>
+			
+			<p:messages autoUpdate="true"/>
 		<h1>Novo Cliente</h1>
 
 		<p:toolbar style="margin-top: 20px">
 			<p:toolbarGroup>
 				<p:button value="Novo" outcome="/clientes/CadastroCliente"></p:button>
-				<p:commandButton value="Salvar" id="botaoSalvar"></p:commandButton>
+				<p:commandButton value="Salvar" action="#{clienteBean.salvar}" ajax="false"></p:commandButton>
 			</p:toolbarGroup>
 			<p:toolbarGroup align="right">
 				<p:button value="Pesquisa" outcome="/clientes/PesquisaClientes"></p:button>
 			</p:toolbarGroup>
 		</p:toolbar>
 
-		<h:form>
+		
 
 			<p:panelGrid columns="2" id="painel"
 				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
@@ -58,7 +61,7 @@
 				<p:button value="Adicionar endereço" onclick="PF('inclusaoEnderecoDialog').show(); return false;" ></p:button>
 			</p:panelGrid>
 			
-			<p:dataTable id="enderecosTable" value="#{clienteBean.cliente.enderecos}" var="endereco" style="margin-top: 20px" emptyMessage="Nenhum Endereco Encontrado." rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+			<p:dataTable id="enderecosTable" value="#{clienteBean.enderecos}" var="endereco" style="margin-top: 20px" emptyMessage="Nenhum Endereco Encontrado." rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 				
 				<p:column headerText="Logradouro" style="text-align: left">
 					<h:outputText value="#{endereco.logradouro}"/>
@@ -128,7 +131,7 @@
 					value="#{clienteBean.endereco.uf}" />
 				</div>			
 					
-					<p:commandButton value="Incluir" action="#{clienteBean.criaCliente}" update="enderecosTable"/>
+					<p:commandButton value="Incluir" action="#{clienteBean.salvar}" update="enderecosTable"/>
 				
 				</h:panelGroup>								
 		</p:dialog>
