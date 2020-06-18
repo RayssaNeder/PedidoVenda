@@ -12,6 +12,7 @@ import javax.persistence.Persistence;
 
 import com.algaworks.pedidovenda.model.Categoria;
 import com.algaworks.pedidovenda.model.Produto;
+import com.algaworks.pedidovenda.repository.CategoriasRepository;
 import com.algaworks.pedidovenda.util.jpa.EntityManagerProducer;
 
 @Named
@@ -24,7 +25,7 @@ public class CadastroProdutoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	EntityManager manager;
+	private CategoriasRepository categoriasRepository;
 	private Produto produto;
 	private List<Categoria> categorias;
 	
@@ -35,7 +36,7 @@ public class CadastroProdutoBean implements Serializable {
 	public void inicializar() {
 		System.out.println("Inicializando lista de categorias");
 		
-		this.categorias = manager.createQuery("from Categoria", Categoria.class).getResultList() ;
+		this.categorias = categoriasRepository.buscarTodas();
 				
 	}
 
