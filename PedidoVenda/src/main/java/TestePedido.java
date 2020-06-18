@@ -41,7 +41,7 @@ public class TestePedido {
 		pedido.setCliente(cliente);
 		pedido.setDataCriacao(new Date());
 		pedido.setDataEntrega(new Date());
-		pedido.setFormaPagamento(FormaPagamento.CARTAO_CREDITO);
+	//	pedido.setFormaPagamento(FormaPagamento.CARTAO_CREDITO);
 		pedido.setObservacao("Aberto das 08 às 18h");
 		pedido.setStatusPedido(StatusPedido.ORCAMENTO);
 		pedido.setValorDesconto(BigDecimal.ZERO);

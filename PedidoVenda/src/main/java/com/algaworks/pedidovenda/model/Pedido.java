@@ -73,8 +73,6 @@ public class Pedido implements Serializable {
 	@NotNull
 	private FormaPagamento formaPagamento;
 	
-	private List<FormaPagamento> formasDePagamento;
-	
 
 	
 	
@@ -157,28 +155,6 @@ public class Pedido implements Serializable {
 	public void setStatusPedido(StatusPedido statusPedido) {
 		this.statusPedido = statusPedido;
 	}
-	public FormaPagamento getFormaPagamento() {
-		return formaPagamento;
-	}
-	public void setFormaPagamento(FormaPagamento formaPagamento) {
-		this.formaPagamento = formaPagamento;
-	}
-
-
-
-	public List<FormaPagamento> getFormasDePagamento() {
-		return formasDePagamento;
-	}
-
-
-
-	public void setFormasDePagamento(List<FormaPagamento> formasDePagamento) {
-		this.formasDePagamento = formasDePagamento;
-	}
-	
-	
-	
-	
-	
+		
 	
 }
