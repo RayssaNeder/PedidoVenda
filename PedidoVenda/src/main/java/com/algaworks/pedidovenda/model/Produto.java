@@ -20,6 +20,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.algaworks.pedidovenda.controller.validation.SKU;
+
 
 @Entity
 public class Produto implements Serializable{
@@ -35,13 +37,16 @@ public class Produto implements Serializable{
 	@Column(nullable = false, length = 100)
 	@NotBlank
 	@Size(max = 10)
-	private String nome;
-	@Column(nullable = false, unique = true)
-	private String sku;
-	@Column(name = "valor_unitario",precision = 10, scale = 2)
+	private String nome;	
 	@NotNull
+	@NotBlank
+	@Column(nullable = false, unique = true)
+	@SKU
+	private String sku;
+	@NotBlank(message = "Rayssa freitas")
+	@Column(name = "valor_unitario",precision = 10, scale = 2)
 	private BigDecimal valorUnitario;
-	@NotNull @Min(0) @Max(9999)
+	@NotNull @Min(0) @Max(value = 9999, message = "tem valor muito alto")
 	@Column(name = "qtde_estoque")
 	private Integer qtdeEstoque;
 	@ManyToOne
