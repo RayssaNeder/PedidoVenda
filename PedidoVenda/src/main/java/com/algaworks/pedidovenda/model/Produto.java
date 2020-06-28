@@ -43,14 +43,15 @@ public class Produto implements Serializable{
 	@Column(nullable = false, unique = true)
 	@SKU
 	private String sku;
-	@NotBlank(message = "Rayssa freitas")
-	@Column(name = "valor_unitario",precision = 10, scale = 2)
+	@NotNull(message = "é obrigatório")
+	@Column(name="valor_unitario", nullable = false, precision = 10, scale = 2)
 	private BigDecimal valorUnitario;
 	@NotNull @Min(0) @Max(value = 9999, message = "tem valor muito alto")
 	@Column(name = "qtde_estoque")
 	private Integer qtdeEstoque;
 	@ManyToOne
 	@JoinColumn(name = "categoria_id", nullable = false)
+	//@NotNull
 	private Categoria categoria;
 	
 	

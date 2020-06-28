@@ -38,13 +38,13 @@
 				<p:inputText id="nome" size="60" maxlength="80" value="#{cadastroProdutoBean.produto.nome}"/>
 
 				<p:outputLabel value="Categoria" for="categoria" />
-				<p:selectOneMenu id="categoria">
+				<p:selectOneMenu id="categoria" value="#{cadastroProdutoBean.categoria}">
 					<f:selectItem itemLabel="Selecione a Categoria" />
 					<f:selectItems value="#{cadastroProdutoBean.categorias}" var="categoria" itemValue="#{categoria}" itemLabel="#{categoria.descricao}"></f:selectItems>					
 				</p:selectOneMenu>
 
 				<p:outputLabel value="SubCategoria" for="subCategoria" />
-				<p:selectOneMenu id="subCategoria">
+				<p:selectOneMenu id="subCategoria" value="#{cadastroProdutoBean.produto.categoria}">
 					<f:selectItem itemLabel="Selecione a Categoria"></f:selectItem>
 				</p:selectOneMenu>
 
