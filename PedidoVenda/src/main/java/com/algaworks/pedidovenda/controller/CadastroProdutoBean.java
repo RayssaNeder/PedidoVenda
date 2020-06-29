@@ -15,6 +15,7 @@ import com.algaworks.pedidovenda.model.Categoria;
 import com.algaworks.pedidovenda.model.Produto;
 import com.algaworks.pedidovenda.repository.CategoriasRepository;
 import com.algaworks.pedidovenda.util.jpa.EntityManagerProducer;
+import com.algaworks.pedidovenda.util.jsf.FacesUtil;
 
 @Named
 @ViewScoped
@@ -29,6 +30,8 @@ public class CadastroProdutoBean implements Serializable {
 	private CategoriasRepository categoriasRepository;
 	private Produto produto;
 	private List<Categoria> categorias;
+	private List<Categoria> subcategorias;
+	
 	@NotNull
 	private Categoria categoria;
 	
@@ -39,8 +42,14 @@ public class CadastroProdutoBean implements Serializable {
 	public void inicializar() {
 		System.out.println("Inicializando lista de categorias");
 		
-		this.categorias = categoriasRepository.buscarTodas();
+		if(FacesUtil.isNotPostBack()) {
+			this.categorias = categoriasRepository.buscarTodas();
+		}
 				
+	}
+	
+	public void carregaSubCategorias() {
+		this.subcategorias = categoriasRepository.buscarTodasSubcategorias(this.categoria);
 	}
 
 	public void salvar() {
@@ -66,6 +75,16 @@ public class CadastroProdutoBean implements Serializable {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+
+	public List<Categoria> getSubcategorias() {
+		return subcategorias;
+	}
+
+	public void setSubcategorias(List<Categoria> subcategorias) {
+		this.subcategorias = subcategorias;
+	}
+	
+	
 	
 	
 	
