@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import com.algaworks.pedidovenda.model.Produto;
 import com.algaworks.pedidovenda.repository.ProdutosRepository;
+import com.algaworks.pedidovenda.util.jpa.Transactional;
 
 public class CadastroProdutoService implements Serializable {
 
@@ -17,6 +18,7 @@ public class CadastroProdutoService implements Serializable {
 	@Inject
 	ProdutosRepository produtosRepositorio;
 
+	@Transactional
 	public Produto salvar(Produto produto) {
 		Produto produtoExistente = produtosRepositorio.porSKU(produto.getSku());
 		if (produtoExistente != null) {

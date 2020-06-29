@@ -21,11 +21,7 @@ public class ProdutosRepository implements Serializable {
 	
 	
 	public Produto salvar(Produto produto) {
-		EntityTransaction trx = manager.getTransaction(); 
-		trx.begin();
-		manager.merge(produto);
-		trx.commit();
-		return produto;
+		return manager.merge(produto);
 	}
 
 
