@@ -1,6 +1,7 @@
 package com.algaworks.pedidovenda.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import com.algaworks.pedidovenda.model.Categoria;
 import com.algaworks.pedidovenda.model.Produto;
 import com.algaworks.pedidovenda.repository.CategoriasRepository;
+import com.algaworks.pedidovenda.service.CadastroProdutoService;
 import com.algaworks.pedidovenda.util.jpa.EntityManagerProducer;
 import com.algaworks.pedidovenda.util.jsf.FacesUtil;
 
@@ -28,6 +30,8 @@ public class CadastroProdutoBean implements Serializable {
 	
 	@Inject
 	private CategoriasRepository categoriasRepository;
+	@Inject
+	private CadastroProdutoService cadastroProdutoService;
 	private Produto produto;
 	private List<Categoria> categorias;
 	private List<Categoria> subcategorias;
@@ -36,7 +40,7 @@ public class CadastroProdutoBean implements Serializable {
 	private Categoria categoria;
 	
 	public CadastroProdutoBean() {
-		produto = new Produto();
+		limpar();
 	}
 	
 	public void inicializar() {
@@ -53,7 +57,15 @@ public class CadastroProdutoBean implements Serializable {
 	}
 
 	public void salvar() {
-		System.out.println("Categoria selecionada" + this.categoria.getDescricao());
+		this.produto = cadastroProdutoService.salvar(this.produto);
+		limpar();
+		FacesUtil.addInfoMessage("Produto salvo com sucesso!");
+	}
+	
+	private void limpar() {
+		this.produto = new Produto();
+		categoria = null;
+		subcategorias = new ArrayList<>();
 	}
 
 	public Produto getProduto() {
