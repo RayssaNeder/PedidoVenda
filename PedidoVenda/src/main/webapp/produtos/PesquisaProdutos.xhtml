@@ -11,10 +11,12 @@
 
 		<h:form>
 			<h1>Novo Produto</h1>
+			
+			<p:messages autoUpdate="true" closable="true"/>
 
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
-					<p:commandButton value="Pesquisar"></p:commandButton>
+					<p:commandButton value="Pesquisar" action="#{pesquisaProdutosBean.pesquisar}" update="@form"></p:commandButton>
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right">
 					<p:button value="Novo" outcome="/produtos/CadastroProduto"></p:button>
@@ -24,32 +26,34 @@
 			<p:panelGrid columns="2" id="painel"
 				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
 				<p:outputLabel value="SKU" for="sku" />
-				<p:inputText id="sku" size="20"></p:inputText>
+				<p:inputText value="#{pesquisaProdutosBean.produtoFilter.sku}" id="sku" size="20"></p:inputText>
 
 				<p:outputLabel value="Nome" for="nome" />
-				<p:inputText id="nome" size="60"></p:inputText>
+				<p:inputText value="#{pesquisaProdutosBean.produtoFilter.nome}" id="nome" size="60"></p:inputText>
 			</p:panelGrid>
 			
 			
-			<p:dataTable id="produtosTable" value="#{pesquisaProdutosBean.produtosFiltrados}" var="produto" style="margin-top: 20px" emptyMessage="Nenhum Produto Encontrado." rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+			<p:dataTable id="produtosTable" value="#{pesquisaProdutosBean.produtosFiltrados}"  var="produto" style="margin-top: 20px" emptyMessage="Nenhum Produto Encontrado." rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 				<p:column headerText="SKU" style="text-align: center; width: 100px">
-					<h:outputText value="123"/>
+					<h:outputText value="#{produto.sku}"/>
 				</p:column>
 				
 				<p:column headerText="Nome" style="text-align: center; width: 100px">
-					<h:outputText value="Bala de Morango"/>
+					<h:outputText value="#{produto.nome}"/>
 				</p:column>
 				
 				<p:column headerText="Categoria" style="text-align: center; width: 250px">
-					<h:outputText value="Doces - Balas e chicletes"/>
+					<h:outputText value="#{produto.categoria.categoriaPai.descricao} - #{produto.categoria.descricao}"/>
 				</p:column>
 				
 				<p:column headerText="Valor Unitário" style="text-align: right; width: 120px">
-					<h:outputText value="RS 1,20"/>
+					<h:outputText value="#{produto.valorUnitario}">
+						<f:convertNumber type="currency"></f:convertNumber>
+					</h:outputText>
 				</p:column>
 				
 				<p:column headerText="Estoque" style="text-align: center; width: 100px">
-					<h:outputText value="98"/>
+					<h:outputText value="#{produto.qtdeEstoque}"/>
 				</p:column>
 				
 				<p:column  style="text-align: center; width: 100px">

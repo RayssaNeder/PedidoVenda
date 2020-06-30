@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import com.algaworks.pedidovenda.model.Categoria;
 import com.algaworks.pedidovenda.model.Produto;
 import com.algaworks.pedidovenda.repository.CategoriasRepository;
+import com.algaworks.pedidovenda.repository.ProdutosRepository;
 import com.algaworks.pedidovenda.service.CadastroProdutoService;
 import com.algaworks.pedidovenda.util.jpa.EntityManagerProducer;
 import com.algaworks.pedidovenda.util.jsf.FacesUtil;
@@ -39,6 +40,8 @@ public class CadastroProdutoBean implements Serializable {
 	@NotNull
 	private Categoria categoria;
 	
+	
+	
 	public CadastroProdutoBean() {
 		limpar();
 	}
@@ -49,7 +52,7 @@ public class CadastroProdutoBean implements Serializable {
 		if(FacesUtil.isNotPostBack()) {
 			this.categorias = categoriasRepository.buscarTodas();
 		}
-				
+		
 	}
 	
 	public void carregaSubCategorias() {
