@@ -15,6 +15,7 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import com.algaworks.pedidovenda.model.Categoria;
 import com.algaworks.pedidovenda.model.Produto;
 import com.algaworks.pedidovenda.repository.filter.ProdutoFilter;
 import com.algaworks.pedidovenda.service.NegocioException;
@@ -58,5 +59,10 @@ public class ProdutosRepository implements Serializable {
 		
 		return criteria.addOrder(Order.asc("nome")).list();
 		
+	}
+
+
+	public Produto porId(Long id) {
+		return manager.find(Produto.class, id);
 	}
 }
