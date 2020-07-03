@@ -12,10 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+
 
 @Entity
 public class Usuario implements Serializable{
@@ -26,13 +26,13 @@ public class Usuario implements Serializable{
 	@GeneratedValue
 	private Long id;
 	@Column(nullable = false,  length = 100)
-	@NotBlank @Size(max = 100)
+//	@NotBlank @Size(max = 100)
 	private String nome;
-	@NotBlank @Size(max = 255)
+//	@NotBlank @Size(max = 255)
 	@Column(nullable = false, length = 255, unique = true)
 	private String email;
 	private String senha;
-	@NotNull
+	//@NotNull
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "grupo_id"))
 	private List<Grupo> grupos = new ArrayList<>(); 
