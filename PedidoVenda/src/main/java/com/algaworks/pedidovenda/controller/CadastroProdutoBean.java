@@ -7,17 +7,12 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.validation.constraints.NotNull;
 
 import com.algaworks.pedidovenda.model.Categoria;
 import com.algaworks.pedidovenda.model.Produto;
 import com.algaworks.pedidovenda.repository.CategoriasRepository;
-import com.algaworks.pedidovenda.repository.ProdutosRepository;
 import com.algaworks.pedidovenda.service.CadastroProdutoService;
-import com.algaworks.pedidovenda.util.jpa.EntityManagerProducer;
 import com.algaworks.pedidovenda.util.jsf.FacesUtil;
 
 @Named
