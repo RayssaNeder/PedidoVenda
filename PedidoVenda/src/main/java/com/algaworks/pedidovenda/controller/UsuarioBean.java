@@ -13,6 +13,7 @@ import javax.persistence.Transient;
 //import com.algaworks.pedidovenda.model.Cliente;
 import com.algaworks.pedidovenda.model.Grupo;
 import com.algaworks.pedidovenda.model.Usuario;
+import com.algaworks.pedidovenda.repository.GrupoRepository;
 import com.algaworks.pedidovenda.service.CadastroUsuarioService;
 import com.algaworks.pedidovenda.util.jsf.FacesUtil;
 
@@ -27,15 +28,24 @@ public class UsuarioBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Usuario usuario;
-	private Grupo grupo = new Grupo();
+	private Grupo grupo;
 	private List<Usuario> usuarios = new ArrayList<Usuario>();
-	private List<Grupo> gruposDoUsuario;
+	private List<Grupo> grupos;
 	
 	@Inject
 	private CadastroUsuarioService cadastroUsuarioService;
 	
+	@Inject
+	private GrupoRepository grupoRepository;
+	
 	public UsuarioBean() {
 		limpar();
+	}
+	
+	public void inicializar() {
+		if(FacesUtil.isNotPostBack()) {
+			this.grupos = grupoRepository.buscarTodos();
+		}
 	}
 	
 	public void salvar() {
@@ -44,9 +54,21 @@ public class UsuarioBean implements Serializable {
 		FacesUtil.addInfoMessage("Uauário cadastrado com sucesso");
 	}
 	
+	
+	public void adicionarGrupo() {
+		if(!this.usuario.getGrupos().contains(grupo)) {
+			this.usuario.getGrupos().add(this.grupo);
+		}
+	}
+	
+	public void removerGrupo() {
+		this.usuario.getGrupos().remove(this.grupo);
+	}
 
 	private void limpar() {
 		this.usuario = new Usuario();
+		//this.grupos = new ArrayList<>();
+		this.grupo = new Grupo();
 	}
 
 	public Usuario getUsuario() {
@@ -65,12 +87,12 @@ public class UsuarioBean implements Serializable {
 	}
 
 
-	public void setGruposDoUsuario(List<Grupo> gruposDoUsuario) {
-		this.gruposDoUsuario = gruposDoUsuario;
+	public void setGrupos(List<Grupo> grupos) {
+		this.grupos = grupos;
 	}
 
-	public List<Grupo> getGruposDoUsuario() {
-		return gruposDoUsuario;
+	public List<Grupo> getGrupos() {
+		return grupos;
 	}
 
 	public Grupo getGrupo() {

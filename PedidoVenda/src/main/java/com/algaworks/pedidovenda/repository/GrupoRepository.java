@@ -1,0 +1,25 @@
+package com.algaworks.pedidovenda.repository;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+
+import com.algaworks.pedidovenda.model.Grupo;
+
+public class GrupoRepository implements Serializable {
+	
+	@Inject
+	EntityManager manager;
+	
+	public List<Grupo> buscarTodos(){
+		return manager.createQuery("from Grupo", Grupo.class).getResultList();
+		
+	}
+
+	public Grupo porId(Long id) {
+		return manager.find(Grupo.class, id);
+	}
+
+}

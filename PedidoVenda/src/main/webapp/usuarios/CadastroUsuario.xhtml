@@ -8,8 +8,10 @@
 	<ui:define name="titulo">Novo Usuário</ui:define>
 
 	<ui:define name="corpo">
+	
+		<f:event listener="#{usuarioBean.inicializar}" type="preRenderView"></f:event>
 
-		<h:form>
+		<h:form id="frmCadastro">
 			<h1>Novo Usuário</h1>
 
 			<p:messages autoUpdate="true" closable="true" />
@@ -47,21 +49,22 @@
 				<p:outputLabel value="Confirme a senha" for="confirmacaoSenha" />
 				<p:password id="confirmacaoSenha"
 					value="#{usuarioBean.usuario.senha}" required="true" />
+					
+					
 
 			</p:panelGrid>
 
-			<h:panelGrid columns="2" style="margin-top: 20px">
-				<p:selectOneMenu id="grupo" value="#{usuarioBean.grupo}"
-					style="width: 200px" var="grupo">
-					<f:selectItems value="#{usuarioBean.gruposDoUsuario}" var="grupo"
-						itemLabel="#{grupo.nome}" itemValue="#{grupo}" />
+			 <p:panelGrid style="margin-top: 20px" columns="2">
+				<p:selectOneMenu id="grupo" value="#{usuarioBean.grupo}" style="width: 200px">
+					<f:selectItem itemLabel="Selecione o grupo"/>
+					<f:selectItems value="#{usuarioBean.grupos}" var="grupo" itemLabel="#{grupo.nome}" itemValue="#{grupo}" />
 				</p:selectOneMenu>
 
-				<p:commandButton value="Adicionar Grupo" id="botaoSalvar" />
-			</h:panelGrid>
+				<p:commandButton value="Adicionar Grupo" id="botaoSalvar" action="#{usuarioBean.adicionarGrupo}" update=":frmCadastro:grupoTable"/>
+			</p:panelGrid>
 
-			<p:dataTable id="grupoTable" value="#{usuarioBean.gruposDoUsuario}"
-				widgetVar="inclusaoGrupoDialog" var="grupo" style="margin-top: 20px"
+			<p:dataTable id="grupoTable" value="#{usuarioBean.usuario.grupos}"
+				widgetVar="inclusaoGrupoDialog" var="grupo" style="margin-top: 30px"
 				emptyMessage="Nenhum grupo Encontrado." rows="20" paginator="true"
 				paginatorAlwaysVisible="false" paginatorPosition="bottom">
 
@@ -70,8 +73,10 @@
 				</p:column>
 
 				<p:column style="text-align: center; width: 20px">
-					<p:button title="Excluir" icon="ui-icon-trash"
-						onclick="PF('excluirGrupo').show(); return false;" />
+					<p:commandButton title="Excluir" icon="ui-icon-trash" 
+						onclick="PF('excluirGrupo').show(); return false;" >
+					<f:setPropertyActionListener value="#{grupo}" target="#{usuarioBean.grupo}"></f:setPropertyActionListener>
+						</p:commandButton>
 				</p:column>
 			</p:dataTable>
 
@@ -85,7 +90,7 @@
 				<h:panelGrid columns="2">
 					<p:commandButton value="Sim" action="#{clienteBean.removeCliente}"
 						oncomplete="PF('excluirGrupo').hide(); return false;"
-						update="grupoTable" />
+						update="grupoTable" actionListener="#{usuarioBean.removerGrupo}"/>
 					<p:commandButton value="Nao"
 						onclick="PF('excluirGrupo').hide(); return false;" />
 				</h:panelGrid>
