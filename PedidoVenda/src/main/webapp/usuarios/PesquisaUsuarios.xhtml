@@ -9,12 +9,14 @@
 
 	<ui:define name="corpo">
 
-		<h:form>
+		<h:form id="frmPesquisa">
 			<h1>Pesquisa de Usuários</h1>
+			
+			<p:messages autoUpdate="true" closable="true"/>
 
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
-					<p:commandButton value="Pesquisar"></p:commandButton>
+					<p:commandButton value="Pesquisar" action="#{pesquisaUsuariosBean.pesquisar}" update="@form"></p:commandButton>
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right">
 					<p:button value="Novo" outcome="/usuarios/CadastroUsuario"></p:button>
@@ -25,27 +27,34 @@
 				style="width: 100%; margin-top: 20px" >
 				
 				<p:outputLabel value="Nome" for="nome" />
-				<p:inputText value="#{usuarioBean.usuario.nome}" id="nome" size="60"></p:inputText>
+				<p:inputText value="#{pesquisaUsuariosBean.usuarioFilter.nome}" id="nome" size="60"></p:inputText>
 			</p:panelGrid>
 			
 			
-			<p:dataTable id="usuariosTable" value="#{usuarioBean.usuarios}" var="usuario" style="margin-top: 20px" emptyMessage="Nenhum Cliente Encontrado." rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+			<p:dataTable id="usuariosTable" value="#{pesquisaUsuariosBean.usuariosFiltrados}" var="usuario" style="margin-top: 20px" emptyMessage="Nenhum Usuário Encontrado." rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 				
 				<p:column headerText="Nome" style="text-align: left">
 					<h:outputText value="#{usuario.nome}"/>
 				</p:column>
 				
 				
-				<p:column headerText="E-mail" style="text-align: left; width: 100px">
+				<p:column headerText="E-mail" style="text-align: left; width: 300px">
 					<h:outputText value="#{usuario.email}"/>
 				</p:column>
 				
 				
-				<p:column  style="text-align: center; width: 20px">
+				<p:column  style="text-align: center; width: 100px">
 					<p:button icon="ui-icon-pencil" title="Editar"/>
-					<p:commandButton icon="ui-icon-trash" title="Excluir"/>
+					<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclussao').show()" process="@this" update=":frmPesquisa:dlgConfirmacaoExclusao">
+						<f:setPropertyActionListener value="#{usuario}" target="#{pesquisaUsuariosBean.usuarioSelecionado}"></f:setPropertyActionListener>
+					</p:commandButton>
 				</p:column>
 			</p:dataTable>
+			
+			<p:confirmDialog header="Exlusão de Usuario" id="dlgConfirmacaoExclusao" message="Tem certeza que deseja excluir o usuario #{pesquisaUsuariosBean.usuarioSelecionado.nome}?" widgetVar="confirmacaoExclussao">
+				<p:button value="Não" onclick="PF('confirmacaoExclussao').hide(); return false;"></p:button>
+				<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclussao').hide();" action="#{pesquisaUsuariosBean.excluir}" process="@this" update=":frmPesquisa:usuariosTable"></p:commandButton>
+			</p:confirmDialog>
 		</h:form>
 
 	</ui:define>
