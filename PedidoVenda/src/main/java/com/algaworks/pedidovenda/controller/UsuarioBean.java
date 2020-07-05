@@ -63,6 +63,7 @@ public class UsuarioBean implements Serializable {
 	
 	public void removerGrupo() {
 		this.usuario.getGrupos().remove(this.grupo);
+		FacesUtil.addInfoMessage("Grupo removido com sucesso");
 	}
 
 	private void limpar() {

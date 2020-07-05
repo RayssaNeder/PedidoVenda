@@ -21,6 +21,10 @@ public class CadastroUsuarioService implements Serializable {
 	
 	@Transactional
 	public Usuario salvar(Usuario usuario) {
+		Usuario usuarioExistente = usuarioRepository.porEmail(usuario.getEmail());
+		if(usuarioExistente != null && !usuarioExistente.equals(usuario)) {
+			throw new NegocioException("Já exste um usuário cadastrao para o email informado");
+		}
 		return usuarioRepository.salvar(usuario);
 		
 	}

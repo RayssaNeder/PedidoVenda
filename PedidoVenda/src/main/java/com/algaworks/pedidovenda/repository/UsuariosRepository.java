@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 
 import org.apache.commons.lang3.StringUtils;
@@ -56,8 +57,17 @@ public class UsuariosRepository implements Serializable {
 		}
 	}
 
-	private Usuario porId(Long id) {
+	public Usuario porId(Long id) {
 		return manager.find(Usuario.class, id);
 	}
+
+	public Usuario porEmail(String email) {
+		try {
+			return manager.createQuery("from Usuario where upper(email) = :email", Usuario.class).setParameter("email", email.toUpperCase()).getSingleResult();
+		}catch(NoResultException e) {
+				return null;
+			}
+		}
+	
 
 }

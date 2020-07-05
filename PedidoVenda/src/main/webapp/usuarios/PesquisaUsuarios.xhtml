@@ -44,7 +44,9 @@
 				
 				
 				<p:column  style="text-align: center; width: 100px">
-					<p:button icon="ui-icon-pencil" title="Editar"/>
+					<p:button icon="ui-icon-pencil" title="Editar" outcome="/usuarios/CadastroUsuario">
+						<f:param name="usuario" value="#{usuario.id}"></f:param>
+					</p:button>
 					<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclussao').show()" process="@this" update=":frmPesquisa:dlgConfirmacaoExclusao">
 						<f:setPropertyActionListener value="#{usuario}" target="#{pesquisaUsuariosBean.usuarioSelecionado}"></f:setPropertyActionListener>
 					</p:commandButton>
