@@ -68,4 +68,8 @@ public class PedidosRepository implements Serializable {
 		
 		return criteria.addOrder(Order.asc("id")).list();
 	}
+
+	public Pedido salvar(Pedido pedido) {
+		return manager.merge(pedido);
+	}
 }

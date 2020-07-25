@@ -7,11 +7,19 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.algaworks.pedidovenda.model.Cliente;
 import com.algaworks.pedidovenda.model.EnderecoEntrega;
+import com.algaworks.pedidovenda.model.FormaPagamento;
 import com.algaworks.pedidovenda.model.Pedido;
+import com.algaworks.pedidovenda.model.Usuario;
+import com.algaworks.pedidovenda.repository.ClienteRepository;
+import com.algaworks.pedidovenda.repository.UsuariosRepository;
+import com.algaworks.pedidovenda.service.CadastroPedidoService;
 import com.algaworks.pedidovenda.service.NegocioException;
+import com.algaworks.pedidovenda.util.jsf.FacesUtil;
 
 
 @Named
@@ -22,18 +30,42 @@ public class CadastroPedidoBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private List<Integer> itens;
 	
 	private Pedido pedido;
+	private List<Usuario> vendedores;
+	
+	@Inject
+	private ClienteRepository clienteRepository;
+	
+	@Inject
+	private UsuariosRepository usuariosRepository;
+	
+	@Inject
+	private CadastroPedidoService cadastroPedidoService;
+	
+	public List<Cliente> completarCliente(String nome) {
+		return this.clienteRepository.porNome(nome);
+	}
+	
+	public FormaPagamento[] getFormasPagamento(){
+		return FormaPagamento.values();
+	}
 	
 	public CadastroPedidoBean() {
+		limpar();
+	}
+	
+	public void inicializar() {
+		if(FacesUtil.isNotPostBack()) {
+		this.vendedores = usuariosRepository.vendedores();
+		}
+	}
+	
+	public void limpar() {
 		pedido = new Pedido();
 		EnderecoEntrega enderecoEntrega = new EnderecoEntrega();
 		pedido.setEnderecoEntrega(enderecoEntrega);
-		itens = new ArrayList<>();
-		itens.add(1);
 	}
-	
 	
 
 	public Pedido getPedido() {
@@ -47,13 +79,15 @@ public class CadastroPedidoBean implements Serializable {
 	}
 
 
+	public void salvar(){
+		this.pedido = cadastroPedidoService.salvarPedido(pedido);
+		FacesUtil.addInfoMessage("Pedido salvo com sucesso.");
+	}
 
-	public List<Integer> getItens() {
-		return itens;
+	public List<Usuario> getVendedores() {
+		return vendedores;
 	}
 	
-	public void salvar(){
-		throw new NegocioException("Pedido não salvo.Implementação em andamento");
-	}
+	
 
 }

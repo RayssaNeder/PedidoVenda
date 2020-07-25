@@ -68,6 +68,11 @@ public class UsuariosRepository implements Serializable {
 				return null;
 			}
 		}
+
+	public List<Usuario> vendedores() {
+		// TODO Implementar verificaao se usuário é um vendedor
+		return  manager.createQuery("from Usuario", Usuario.class).getResultList();
+	}
 	
 
 }

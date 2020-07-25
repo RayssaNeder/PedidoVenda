@@ -8,20 +8,20 @@ public enum FormaPagamento {
 	BOLETO_BANCARIO("Boleto Bancário"),
 	DEPOSITO_BANCARIO("Deposito Bancário");
 	
-	private String descrição;
+	private String descricao;
 	
 	
 
-	private FormaPagamento(String descrição) {
-		this.descrição = descrição;
+	private FormaPagamento(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public String getDescrição() {
-		return descrição;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setDescrição(String descrição) {
-		this.descrição = descrição;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 	
 	

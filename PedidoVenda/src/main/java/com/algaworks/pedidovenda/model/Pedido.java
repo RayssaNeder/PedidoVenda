@@ -45,13 +45,13 @@ public class Pedido implements Serializable {
 	private Date dataEntrega;
 	@Column(name = "valor_frete", nullable = false, precision = 10, scale = 2)
 	@NotNull
-	private BigDecimal valorFrete;
+	private BigDecimal valorFrete = BigDecimal.ZERO;
 	@Column(name = "valor_desconto", nullable = false, precision = 10, scale = 2)
 	@NotNull
-	private BigDecimal valorDesconto;
+	private BigDecimal valorDesconto = BigDecimal.ZERO;;
 	@Column(name = "valor_total", nullable = false, precision = 10, scale = 2)
 	@NotNull
-	private BigDecimal valorTotal;
+	private BigDecimal valorTotal = BigDecimal.ZERO;
 	@ManyToOne
 	@JoinColumn(name = "vendedor_id", nullable = false)
 	@NotNull
@@ -65,7 +65,7 @@ public class Pedido implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 20)
 	@NotNull
-	private StatusPedido statusPedido;
+	private StatusPedido statusPedido = StatusPedido.ORCAMENTO;
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ItemPedido> itensPedido;
 	@Enumerated(EnumType.STRING)
@@ -154,6 +154,22 @@ public class Pedido implements Serializable {
 	}
 	public void setStatusPedido(StatusPedido statusPedido) {
 		this.statusPedido = statusPedido;
+	}
+	public FormaPagamento getFormaPagamento() {
+		return formaPagamento;
+	}
+	public void setFormaPagamento(FormaPagamento formaPagamento) {
+		this.formaPagamento = formaPagamento;
+	}
+	
+	@Transient
+	public boolean isExistente() {
+		return getId() != null;
+	}
+	
+	@Transient
+	public boolean isNovo() {
+		return getId() == null;
 	}
 		
 	
