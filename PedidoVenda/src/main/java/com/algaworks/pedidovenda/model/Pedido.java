@@ -171,6 +171,24 @@ public class Pedido implements Serializable {
 	public boolean isNovo() {
 		return getId() == null;
 	}
+	public void recalcularValorTotal() {
+		BigDecimal total = BigDecimal.ZERO;
+		
+		total = total.add(this.getValorFrete()).subtract(this.getValorDesconto());
+		
+		for(ItemPedido itemPedido : this.getItensPedido()) {
+			if((itemPedido.getProduto() != null) && (itemPedido.getProduto().getId() != null)) {
+				total = total.add(itemPedido.getValorTotal());
+			}
+		}
+		
+		this.setValorTotal(total);
+	}
+	
+	@Transient
+	public BigDecimal getSubtotal() {
+		return  this.getValorTotal().subtract(this.getValorFrete()).add(getValorDesconto());
+	}
 		
 	
 }

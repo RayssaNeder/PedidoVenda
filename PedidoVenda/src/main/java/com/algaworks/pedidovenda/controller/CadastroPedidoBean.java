@@ -1,11 +1,8 @@
 package com.algaworks.pedidovenda.controller;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -18,7 +15,6 @@ import com.algaworks.pedidovenda.model.Usuario;
 import com.algaworks.pedidovenda.repository.ClienteRepository;
 import com.algaworks.pedidovenda.repository.UsuariosRepository;
 import com.algaworks.pedidovenda.service.CadastroPedidoService;
-import com.algaworks.pedidovenda.service.NegocioException;
 import com.algaworks.pedidovenda.util.jsf.FacesUtil;
 
 
@@ -59,6 +55,8 @@ public class CadastroPedidoBean implements Serializable {
 		if(FacesUtil.isNotPostBack()) {
 		this.vendedores = usuariosRepository.vendedores();
 		}
+		
+		this.calculaTotalPedido();
 	}
 	
 	public void limpar() {
@@ -69,6 +67,14 @@ public class CadastroPedidoBean implements Serializable {
 	
 	public boolean isEditando() {
 		return pedido.getId() != null;
+	}
+	
+	public void calculaTotalPedido() {
+		
+		if(this.pedido != null) {
+			this.pedido.recalcularValorTotal();
+		}
+		
 	}
 	
 
