@@ -8,13 +8,13 @@
     <ui:define name="titulo">Pesquisa de pedidos</ui:define>
     
     <ui:define name="corpo">
-    	<h:form>
+    	<h:form id="form">
 	    	<h1>Pesquisa de pedidos</h1>
 	    	
 	    	<p:toolbar style="margin-top: 20px">
 	    		<p:toolbarGroup>
 	    			<p:commandButton value="Pesquisar" action="#{pesquisaPedidosBean.pesquisar}"
-	    				update="@form" />
+	    				update="@form"/>
 	    		</p:toolbarGroup>
 	    		<p:toolbarGroup align="right">
 	    			<p:button value="Novo" outcome="/pedidos/CadastroPedido" />
@@ -52,9 +52,10 @@
 	    		</p:selectManyCheckbox>
 	    	</p:panelGrid>
 	    	
-	    	<p:dataTable id="pedidosTable" value="#{pesquisaPedidosBean.pedidosFiltrados}" var="pedido"
+	    	<p:dataTable id="pedidosTable" value="#{pesquisaPedidosBean.pedidosFiltrados}"  var="pedido"
 		    		style="margin-top: 20px" emptyMessage="Nenhum pedido encontrado."
 		    		rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+		    		
 	    		<p:column headerText="Número" style="text-align: center; width: 100px">
 	    			<h:outputText value="#{pedido.id}"/>
 	    		</p:column>
@@ -75,10 +76,12 @@
 	    			</h:outputText>
 	    		</p:column>
 	    		<p:column headerText="Status" style="width: 100px">
-	    			<h:outputText value="#{pedido.status.descricao}"/>
+	    			<h:outputText value="#{pedido.statusPedido.descricao}"/>
 	    		</p:column>
 	    		<p:column style="text-align: center; width: 50px">
-	    			<p:button icon="ui-icon-pencil" title="Editar"/>
+	    			<p:button icon="ui-icon-pencil" title="Editar" outcome="/pedidos/CadastroPedido">
+	    				<f:param name="pedido" value="#{pedido.id}"></f:param>
+	    			</p:button>
 	    		</p:column>
 	    	</p:dataTable>
 	    	

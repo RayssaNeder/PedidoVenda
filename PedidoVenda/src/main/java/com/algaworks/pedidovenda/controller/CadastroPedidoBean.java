@@ -67,6 +67,10 @@ public class CadastroPedidoBean implements Serializable {
 		pedido.setEnderecoEntrega(enderecoEntrega);
 	}
 	
+	public boolean isEditando() {
+		return pedido.getId() != null;
+	}
+	
 
 	public Pedido getPedido() {
 		return pedido;
