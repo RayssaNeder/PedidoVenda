@@ -4,46 +4,57 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	<!-- <p:dataTable value="#{cadastroPedidoBean.itens}" var="item" id="tableaItens">
+	<p:dataTable value="#{cadastroPedidoBean.pedido.itensPedido}" var="item" id="tableaItens">
 		<p:column headerText="SKU" style="text-align: center" width="100px">
-			<p:inputText size="8" />
+			<h:outputText value="#{item.produto.sku}" rendered="#{item.produtoAssociado}"></h:outputText>
+			
+			<p:inputText size="8" value="#{cadastroPedidoBean.sku}" label="SKU" rendered="#{not item.produtoAssociado}">
+				<p:ajax event="change" process="@this" update="tableaItens :frmCadastro:totalPedido :frmCadastro:subtotal" listener="#{cadastroPedidoBean.carregaProdutoPorSku}"></p:ajax>
+			</p:inputText>
 		</p:column>
 
 		<p:column headerText="Produto">
-			<p:autoComplete styleClass="produto-tabela"/>
+			<h:outputText value="#{item.produto.nome}" rendered="#{item.produtoAssociado}"></h:outputText>
+			<p:autoComplete styleClass="produto-tabela" value="#{cadastroPedidoBean.produtoLinhaEditavel}" completeMethod="#{cadastroPedidoBean.completarProduto}" var="produto" itemLabel="#{produto.nome}" itemValue="#{produto}" forceSelection="true" rendered="#{not item.produtoAssociado}">
+				<p:ajax event="itemSelect" update="tableaItens :frmCadastro:totalPedido :frmCadastro:subtotal" listener="#{cadastroPedidoBean.carregarProdutoLinhaEditavel}" /> 
+			</p:autoComplete>
 		</p:column>
 
 		<p:column headerText="Valor Unitário" style="text-align: right"
 			width="180">
-			<h:outputText value="R$ 0,00">
-				<f:convertNumber type="currency" locale="pt_BR"></f:convertNumber>
+			<h:outputText value="#{item.valorUnitario}">
+				<f:convertNumber type="currency" locale="pt_BR"/>
 			</h:outputText>
 		</p:column>
 
 		<p:column headerText="Quantidade" style="text-align: center"
 			width="100px">
-			<p:inputText size="8" value="1" />
+			<p:inputText size="8" value="#{item.quantidade}" />
 		</p:column>
 
 		<p:column headerText="Estoque" style="text-align: center" width="100">
-			<h:outputText value="0" />
+			<h:outputText value="#{item.produto.qtdeEstoque}" />
 		</p:column>
 
 		<p:column headerText="Valor Total" style="text-align: right"
 			width="100">
-			<h:outputText value="R$ 0,00">
+			<h:outputText value="#{item.valorTotal}">
 				<f:convertNumber type="currency" locale="pt_BR"></f:convertNumber>
 			</h:outputText>
 		</p:column>
 		
 		<p:columnGroup type="footer" >
 			<p:row>
-				<p:column colspan="5" footerText="Subtotal" style="text-align: right" ></p:column>
-			</p:row>
-			<p:column footerText="R$ 0,00" style="text-align: right">
-				
-			</p:column>
+				<p:column colspan="5" footerText="Subtotal" style="text-align: right" />
+				<p:column style="text-align: right">
+					<f:facet name="footer">
+						<h:outputText value="#{cadastroPedidoBean.pedido.subtotal}">
+							<f:convertNumber type="currency"></f:convertNumber>
+						</h:outputText>
+					</f:facet>
+				</p:column>
+		</p:row>
 		</p:columnGroup>
 	</p:dataTable>
- -->
+
 </ui:composition>
