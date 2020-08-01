@@ -4,7 +4,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:dataTable value="#{cadastroPedidoBean.pedido.itensPedido}" var="item" id="tableaItens">
+	<p:dataTable value="#{cadastroPedidoBean.pedido.itensPedido}" var="item" id="tableaItens" rowIndexVar="linha">
 		<p:column headerText="SKU" style="text-align: center" width="100px">
 			<h:outputText value="#{item.produto.sku}" rendered="#{item.produtoAssociado}"></h:outputText>
 			
@@ -29,7 +29,9 @@
 
 		<p:column headerText="Quantidade" style="text-align: center"
 			width="100px">
-			<p:inputText size="8" value="#{item.quantidade}" />
+			<p:inputText size="8" value="#{item.quantidade}">
+				<p:ajax event="change" process="@this" update="tableaItens :frmCadastro:totalPedido :frmCadastro:subtotal" listener="#{cadastroPedidoBean.atualizarQuantidade(item, linha)}"></p:ajax>
+			</p:inputText>
 		</p:column>
 
 		<p:column headerText="Estoque" style="text-align: center" width="100">

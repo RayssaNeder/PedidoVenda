@@ -168,5 +168,18 @@ public class CadastroPedidoBean implements Serializable {
 			this.carregarProdutoLinhaEditavel();
 		}
 	}
+	
+	public void atualizarQuantidade(ItemPedido item, int linha){
+		if(item.getQuantidade() < 1) {
+			if(linha == 0) {
+				item.setQuantidade(1);
+			}else {
+				this.getPedido().getItensPedido().remove(linha);
+			}
+		}
+		
+		this.pedido.recalcularValorTotal();
+		
+	}
 
 }
