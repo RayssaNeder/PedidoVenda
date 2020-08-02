@@ -3,6 +3,8 @@ package com.algaworks.pedidovenda.controller;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Produces;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -10,6 +12,8 @@ import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
 
 import com.algaworks.pedidovenda.controller.validation.SKU;
+import com.algaworks.pedidovenda.converter.PedidoEdicao;
+import com.algaworks.pedidovenda.events.PedidoAlteradoEvent;
 import com.algaworks.pedidovenda.model.Cliente;
 import com.algaworks.pedidovenda.model.EnderecoEntrega;
 import com.algaworks.pedidovenda.model.FormaPagamento;
@@ -35,6 +39,9 @@ public class CadastroPedidoBean implements Serializable {
 	
 	@SKU
 	private String sku;
+	
+	@Produces
+	@PedidoEdicao
 	private Pedido pedido;
 	private Produto produtoLinhaEditavel;
 	
@@ -77,6 +84,10 @@ public class CadastroPedidoBean implements Serializable {
 		pedido = new Pedido();
 		EnderecoEntrega enderecoEntrega = new EnderecoEntrega();
 		pedido.setEnderecoEntrega(enderecoEntrega);
+	}
+	
+	public void pedidoAlterado(@Observes PedidoAlteradoEvent event) {
+		this.pedido = event.getPedido();
 	}
 	
 	public boolean isEditando() {

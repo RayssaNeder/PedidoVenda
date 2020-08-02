@@ -21,6 +21,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.algaworks.pedidovenda.controller.validation.SKU;
+import com.algaworks.pedidovenda.service.NegocioException;
 
 
 @Entity
@@ -53,6 +54,16 @@ public class Produto implements Serializable{
 	@JoinColumn(name = "categoria_id", nullable = false)
 	//@NotNull
 	private Categoria categoria;
+	
+	public void baixarEstoque(Integer quantidade) {
+		int novaQuantidade = this.getQtdeEstoque() - quantidade;
+		
+		if(novaQuantidade < 0) {
+			throw new NegocioException("Não há disponibilidade no estoque de " + quantidade + " itens do produdo " + this.getSku());
+		}
+		
+		this.setQtdeEstoque(novaQuantidade);
+	}
 	
 	
 	public Long getId() {
@@ -115,9 +126,6 @@ public class Produto implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
 
 }
