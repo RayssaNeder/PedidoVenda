@@ -208,6 +208,20 @@ public class Pedido implements Serializable {
 	public boolean isOrcamento() {
 		return this.getStatusPedido().equals(StatusPedido.ORCAMENTO);
 	}
+	
+	public void removerItemVazio() {
+		ItemPedido primeiroItem = this.getItensPedido().get(0);
+		
+		if(primeiroItem != null && primeiroItem.getProduto().getId() == null) {
+			this.getItensPedido().remove(0);
+		}
+		
+	}
+	
+	@Transient
+	public boolean isValorTotalNegativo() {
+		return this.getValorTotal().compareTo(BigDecimal.ZERO) < 0;
+	}
 		
 	
 }

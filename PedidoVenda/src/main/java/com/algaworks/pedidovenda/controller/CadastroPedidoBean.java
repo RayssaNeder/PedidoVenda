@@ -109,8 +109,14 @@ public class CadastroPedidoBean implements Serializable {
 	}
 
 	public void salvar(){
-		this.pedido = cadastroPedidoService.salvarPedido(pedido);
-		FacesUtil.addInfoMessage("Pedido salvo com sucesso.");
+		this.pedido.removerItemVazio();
+		
+		try {
+			this.pedido = cadastroPedidoService.salvarPedido(pedido);
+			FacesUtil.addInfoMessage("Pedido salvo com sucesso.");
+		}finally {
+			this.pedido.adicionarItemVazio();
+		}
 	}
 
 	public List<Usuario> getVendedores() {
